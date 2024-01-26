@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import {Link as RouterLink} from "react-router-dom";
 
 export default function Header(){
     return(
@@ -16,8 +17,8 @@ export default function Header(){
                         Timeshare
                     </Typography>
                     <Button color="inherit">Book a trip</Button>
-                    <Button color="inherit">Login</Button>
-                    <Button color="inherit">Register</Button>
+                    <Button component={RouterLink} to={'/login'} color="inherit">Login</Button>
+                    <Button component={RouterLink} to={'/register'} color="inherit">Register</Button>
                     <IconButton><AccountCircleIcon color="secondary"/></IconButton>
                 </Toolbar>
             </AppBar>
