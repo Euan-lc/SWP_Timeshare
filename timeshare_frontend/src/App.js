@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import "./app.css"
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
+import SearchPage from './pages/Search/SearchPage';
 
 const clientId = "122285275633-uldisg6noor0qau5shbh6hmc5j6mmtai.apps.googleusercontent.com"
 
@@ -41,6 +42,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
+                    <Route path="/search" element={<SearchPage/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

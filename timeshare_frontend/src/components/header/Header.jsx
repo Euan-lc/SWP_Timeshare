@@ -14,10 +14,13 @@ import { useState } from "react";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 
 export default function Header({type}) {
     const [openDate, setOpenDate] = useState(false)
+    const navigate = useNavigate();
     const [date, setDate] = useState([
         {
             startDate: new Date(),
@@ -127,7 +130,9 @@ export default function Header({type}) {
                             </div>}
                     </div>
                     <div className="headerSearchItem">
-                        <IconButton><SearchRoundedIcon className="searchIconButton"/></IconButton>
+                        {/* <Link to={'/search'}> */}
+                         <IconButton onClick={() => navigate("/search")}><SearchRoundedIcon className="searchIconButton"/></IconButton>
+                        {/* </ink> */}
                     </div>
                 </div></>}
             </div>
