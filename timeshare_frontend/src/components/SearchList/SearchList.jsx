@@ -100,7 +100,6 @@ export default function SearchList() {
                             <button className='book-button'>
                                 Book
                             </button>
-                            </Link> }
                         </div>
                     </div>
                 </div>
