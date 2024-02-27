@@ -86,11 +86,11 @@ export default function SearchList() {
                             <p style={{fontSize:16, paddingLeft:25}}>for <span style={{fontSize:25}}>1</span> night</p>
                         </div>
                         <div className="book-timeshare">
-                            {/* <Link to="/payment"> */}
+                            { <Link to="/payment"> 
                             <button className='book-button' >
                                 Book
                             </button>
-                            {/* </Link> */}
+                            </Link> }
                         </div>
                     </div>
                 </button>

@@ -31,43 +31,47 @@ const PaymentPage = () => {
       <p >Input your card details to make payment.</p>
       <p>You will be redirected to your banks authorization</p>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Card Number:</label>
+        <div class="field">
+          <label>Card number:</label>
           <input
             type="text"
             name="cardNumber"
             value={paymentDetails.cardNumber}
             onChange={handleInputChange}
+            placeholder='XXXX XXXX XXXX XXXX'
           />
         </div>
-        <div>
-          <label>Name On Card: </label>
+        <div class="field">
+          <label>Card holder name </label>
           <input
             type="text"
             name="name"
             value={paymentDetails.name}
             onChange={handleInputChange}
+            placeholder='Mike Augustin'
           />
         </div>
-        <div>
+        <div class="field">
           <label>Expiry Date:</label>
           <input
             type="text"
             name="expiryDate"
             value={paymentDetails.expiryDate}
             onChange={handleInputChange}
+            placeholder='eg.10/10'
           />
         </div>
-        <div>
+        <div class="field">
           <label>CVV:</label>
           <input
             type="text"
             name="cvv"
             value={paymentDetails.cvv}
             onChange={handleInputChange}
+            placeholder='eg.123'
           />
         </div>
-        <div>
+        <div class="field">
           <label>Amount:</label>
           <input
             type="text"
@@ -76,7 +80,7 @@ const PaymentPage = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Submit Payment</button>
+        <button type="submit">Pay</button>
       </form>
       {paymentStatus && <div>{paymentStatus}</div>}
     </div>
