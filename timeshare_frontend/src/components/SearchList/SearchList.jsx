@@ -8,6 +8,8 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import {Link} from 'react-router-dom'
+
 
 const options = ['Low to Hight Price', 'High to Low Price'];
 
@@ -84,9 +86,11 @@ export default function SearchList() {
                             <p style={{fontSize:16, paddingLeft:25}}>for <span style={{fontSize:25}}>1</span> night</p>
                         </div>
                         <div className="book-timeshare">
-                            <button className='book-button'>
+                            {/* <Link to="/payment"> */}
+                            <button className='book-button' >
                                 Book
                             </button>
+                            {/* </Link> */}
                         </div>
                     </div>
                 </button>
