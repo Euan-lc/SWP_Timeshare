@@ -97,9 +97,10 @@ export default function SearchList() {
                             <p style={{fontSize:16, paddingLeft:25}}>for <span style={{fontSize:25}}>1</span> night</p>
                         </div>
                         <div className="book-timeshare">
-                            <button className='book-button' onClick={ShowPayment(timeshare.id)}>
+                            <button className='book-button'>
                                 Book
                             </button>
+                            </Link> }
                         </div>
                     </div>
                 </div>
