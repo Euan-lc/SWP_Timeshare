@@ -6,7 +6,7 @@
     position: relative;
 }
 .container{
-    width: 100%;
+    width: 750px;
     margin: 50px 20px;
     position: absolute;
     left: 580px;
@@ -44,7 +44,7 @@
 .card{
     width: 750px;
     height: 230px;
-    border: none !important;
+    
     border-radius: 30px;
     margin: 15px 0;
 }
@@ -56,7 +56,7 @@
     background-color: white;
     /* border: inherit; */
     cursor: pointer;
-    /* border: 5px solid black; */
+    border: 1px lightgray solid;
     transition: box-shadow 0.3s ;
     z-index: 2;
 }

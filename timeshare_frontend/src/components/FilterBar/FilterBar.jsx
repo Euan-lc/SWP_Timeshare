@@ -99,7 +99,7 @@ export default function FilterBar() {
           <p className='name-filter'>Location</p>
             <div>
                 <CheckboxList checkboxes={showAll ? location : location.slice(0, 5)} setCheckboxes={setLocation} />
-                {!showAll && <button onClick={handleShowMore}>More</button>}
+                {!showAll && <button className='button-filter' onClick={handleShowMore}>More</button>}
             </div>
         </div>
         <div className="filter-box">

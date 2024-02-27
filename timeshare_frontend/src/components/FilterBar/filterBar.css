@@ -21,15 +21,16 @@
     
 }
 .filter-text{
-    background-color: black;
+    background-color: lightgray;
 }
 .filter-text span{
     display: flex;
     padding: 10px;
     /* margin: 10px; */
-    border-bottom: 2px solid lightgray ;
+    /* border-top: 2px  solid lightgray ;
+    border-bottom: 2px  solid lightgray ; */
     height: 70px;
-    color: white;
+    /* color: white; */
 }
 .filter-text span .icon{
     vertical-align: middle;
@@ -53,4 +54,18 @@
 .filter-box .name-filter{
     font-size: 23px;
     padding-bottom: 10px;
+}
+.button-filter{
+    margin: 10px 0;
+    border: none;
+    border-radius: 15px;
+    padding: 8px;
+    width: 80px;
+    transition: 0.4s background-color;
+}
+.button-filter:hover{
+    background-color: lightgray;
+}
+.button-filter:active{
+    background-color: rgb(174, 174, 174);
 }

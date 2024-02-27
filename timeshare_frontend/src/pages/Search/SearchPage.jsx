@@ -10,7 +10,7 @@ export default function SearchPage() {
     <>
         <div>
           <Navbar/>
-          {/* <Header/> */}
+          <Header/>
           <div>
             <SearchList/>
             <FilterBar/>
