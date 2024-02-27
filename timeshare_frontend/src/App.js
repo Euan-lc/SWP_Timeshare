@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import HomePage from "./components/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import PropertyList from "./pages/PropertyList";
 
 const theme = createTheme({
     palette: {
@@ -23,9 +24,11 @@ function App() {
                 <Routes>
                     <Route path={"/"} element={<Layout/>}>
                         <Route index element={<HomePage/>}/>
+                        <Route path={"/properties"} element={<PropertyList/>}/>
                     </Route>
                     <Route path={"/login"} element={<Login/>}/>
                     <Route path={"/register"} element={<Register/>}/>
+
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
