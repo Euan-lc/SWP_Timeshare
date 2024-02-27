@@ -9,12 +9,18 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const auth = getAuth();
         localStorage.clear();
         const unsubscribe = onAuthStateChanged(auth, user => {
             setIsLoggedIn(!!user);
+            if (user){
+                setUser(user);
+            } else {
+                setUser(null);
+            }
         });
 
         return () => unsubscribe();
@@ -33,7 +39,7 @@ export default function Navbar() {
                     {!isLoggedIn && <button onClick={() => navigate("/register")} className="navButton">Register</button>}
                     {!isLoggedIn && <button onClick={() => navigate("/login")} className="navButton">Login</button>}
                     {isLoggedIn && <button onClick={logout} className="navButton">Logout</button>}
-                    {isLoggedIn && <IconButton><AccountCircleIcon onClick={() => navigate("/register")} className="navIcon"/></IconButton>}
+                    {isLoggedIn && <IconButton><AccountCircleIcon onClick={() => navigate("/account")} className="navIcon"/></IconButton>}
                 </div>
             </div>
         </div>

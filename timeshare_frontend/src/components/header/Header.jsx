@@ -14,10 +14,15 @@ import { useState } from "react";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import e from "cors";
 
 
 export default function Header({type}) {
-    const [openDate, setOpenDate] = useState(false)
+    const navigate = useNavigate();
+
+    const [destination, setDestination] = useState("");
+    const [openDate, setOpenDate] = useState(false);
     const [date, setDate] = useState([
         {
             startDate: new Date(),
@@ -42,6 +47,10 @@ export default function Header({type}) {
             };
         });
     };
+
+    const handleSearch = () => {
+        navigate("/list", { state: { destination, date, options } });
+    }
 
     return (
         <div className="header">
@@ -71,7 +80,12 @@ export default function Header({type}) {
                 <div className="headerSearch">
                     <div className="headerSearchItem">
                         <Icon><BedRoundedIcon className="searchIcon"/></Icon>
-                        <input type="text" placeholder="Where are you going?" className="headerSearchInput"/>
+                        <input
+                        type="text"
+                        placeholder="Where are you going?"
+                        className="headerSearchInput"
+                        onChange={e=>setDestination(e.target.value)}
+                        />
                     </div>
                     <div className="headerSearchItem">
                         <Icon><CalendarMonthRoundedIcon className="searchIcon"/></Icon>
@@ -81,6 +95,7 @@ export default function Header({type}) {
                             onChange={(item) => setDate([item.selection])}
                             moveRangeOnFirstSelection={false}
                             ranges={date}
+                            minDate={new Date()}
                             className="date"
                         />}
                     </div>
@@ -127,7 +142,7 @@ export default function Header({type}) {
                             </div>}
                     </div>
                     <div className="headerSearchItem">
-                        <IconButton><SearchRoundedIcon className="searchIconButton"/></IconButton>
+                        <IconButton><SearchRoundedIcon onClick={() => handleSearch()} className="searchIconButton"/></IconButton>
                     </div>
                 </div></>}
             </div>

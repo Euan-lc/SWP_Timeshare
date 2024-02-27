@@ -21,7 +21,6 @@ export default function Home() {
             <Header/>
             <div className="homeContainer">
                 <Featured/>
-                
                 <Featured2/>
                 <h1 className="homeTitle">Popular properties</h1>
                 <Popular/>

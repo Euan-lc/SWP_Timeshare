@@ -1,10 +1,13 @@
+import "./app.css";
 import {ThemeProvider, createTheme} from '@mui/material/styles';
 // import Layout from "./pages/Layout";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./pages/Home/Home";
+import List from "./pages/list/List";
+import Timeshare from "./pages/timeshare/Timeshare";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import "./app.css"
+import CustomerAccount from "./pages/customerAccount/CustomerAccount";
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
 
@@ -41,6 +44,9 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
+                    <Route path="/account" element={<CustomerAccount/>}/>
+                    <Route path="/list" element={<List/>}/>
+                    <Route path="/list/timeshare" element={<Timeshare/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

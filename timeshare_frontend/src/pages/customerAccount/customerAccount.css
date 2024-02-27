@@ -1,0 +1,65 @@
+.dashboard{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dashList{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+    gap: 10px;
+    width: 200px;
+    height: 700px;
+    background-color: black;
+    border-radius: 30px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.dashListItem{
+    font-size: 14px;
+    display: flex;
+    color: white;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 30px;
+    cursor: pointer;   
+    justify-content: center;
+    align-items: center;
+}
+
+.dashListItem.active{
+    display: flex;
+    color: black;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 30px;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.dashIcon{
+    vertical-align: middle;
+}
+
+.dashContainer{
+    border: 2px solid grey;
+    border-radius: 10px;
+    height: 700px;
+    width: 1300px;
+    margin-top: 15px;
+    color: black;
+}
+
+.dashContainerIcon{
+    display: flex;
+}
+
+.dashContainer>span{
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+}
+
