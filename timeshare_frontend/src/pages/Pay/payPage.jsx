@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import "./payPage.css";
+import Navbar from '../../components/navbar/Navbar.jsx';
+import Header from '../../components/header/Header.jsx'
+import Footer from "../../components/Footer.js";
+import PaymentSuccessPopup from "../../components/popUp/popUp.jsx"
+
 
 const PaymentPage = () => {
+  const [selectedPayment, setSelectedPayment]= useState(null);
   const [paymentDetails, setPaymentDetails] = useState({
     cardNumber: '',
     expiryDate: '',
@@ -15,32 +21,76 @@ const PaymentPage = () => {
     const { name, value } = e.target;
     setPaymentDetails({ ...paymentDetails, [name]: value });
   };
+  const handlePaymentSelection=(paymentType)=>{
+    setSelectedPayment(paymentType);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the payment details to a server for processing
-    // and handle the response accordingly.
-    // For demonstration purposes, let's assume the payment is successful.
     setPaymentStatus('Payment successful!');
   };
 
-  return (
-    <div class="container">
 
+  return (
+
+    <div class="body">
+      <Navbar/>
+      
+      <div class="container">
       <h2>Let's Make Payment</h2>
       <p >Input your card details to make payment.</p>
       <p>You will be redirected to your banks authorization</p>
       <form onSubmit={handleSubmit}>
-        <div class="field">
-          <label>Card number:</label>
-          <input
-            type="text"
-            name="cardNumber"
-            value={paymentDetails.cardNumber}
-            onChange={handleInputChange}
-            placeholder='XXXX XXXX XXXX XXXX'
-          />
+        <div >
+          <label> Payment Method:</label>
+          <button class="button" onClick={() => handlePaymentSelection('Mastercard')}> Mastercard</button>
+          <button class="button"onClick={() => handlePaymentSelection('PayPal')}>PayPal</button>
+          <button class="button" onClick={() => handlePaymentSelection('Visa')}>Visa</button>
+          
+    
+
+            {selectedPayment && (
+                <div>
+                    {selectedPayment === 'Mastercard' && (
+                        <div class="field">
+                        <label>Mastercard number:</label>
+                        <input
+                          type="text"
+                          name="cardNumber"
+                          value={paymentDetails.cardNumber}
+                          onChange={handleInputChange}
+                          placeholder='XXXX XXXX XXXX 6754'
+                        />
+                      </div>
+                    )}
+                    {selectedPayment === 'PayPal' && (
+                        <div class="field">
+                        <label>PayPal Card number</label>
+                        <input
+                          type="text"
+                          name="cardNumber"
+                          value={paymentDetails.cardNumber}
+                          onChange={handleInputChange}
+                          placeholder='XXXX XXXX XXXX 6543'
+                        />
+                      </div>
+                    )}
+                    {selectedPayment === 'Visa' && (
+                        <div class="field">
+                        <label>Visa Card number:</label>
+                        <input
+                          type="text"
+                          name="cardNumber"
+                          value={paymentDetails.cardNumber}
+                          onChange={handleInputChange}
+                          placeholder='XXXX XXXX XXXX 9865'
+                        />
+                      </div>
+                    )}
+                </div>
+            )}
         </div>
+       
         <div class="field">
           <label>Card holder name </label>
           <input
@@ -78,11 +128,16 @@ const PaymentPage = () => {
             name="amount"
             value={paymentDetails.amount}
             onChange={handleInputChange}
+            placeholder= '$220'
           />
         </div>
-        <button type="submit">Pay</button>
+        
       </form>
-      {paymentStatus && <div>{paymentStatus}</div>}
+      <div className="App">
+      {/* Các thành phần khác trong ứng dụng */}
+      <PaymentSuccessPopup />
+    </div>
+      </div>
     </div>
   );
 };

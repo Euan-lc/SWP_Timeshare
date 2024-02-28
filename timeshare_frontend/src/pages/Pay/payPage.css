@@ -1,14 +1,23 @@
 
+
 .container {
     max-width: 600px; /* Độ rộng tối đa của container */
-    margin: 0 auto; /* Canh giữa container */
-    padding: 20px; /* Padding bên trong container */
+    text-align: center;/* Canh giữa container */
+    padding: 20px;/* Padding bên trong container */
     background-color: #ffffff; /* Màu nền của container */
     border-radius: 10px; /* Bo tròn viền của container */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
     
   }
-
+.button{
+    padding: 10px 20px;
+    background-color: blue;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 10px;
+}
 
   .container h2 {
     font-size: 24px; /* Cỡ chữ của tiêu đề */
@@ -18,6 +27,8 @@
   .container form {
     display: flex;
     flex-direction: column; /* Xếp thành phần con theo chiều dọc */
+    text-align: left;
+    margin: 0;
   }
   .field{
     display: flex;
