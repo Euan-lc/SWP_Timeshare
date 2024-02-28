@@ -5,6 +5,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import List from "./pages/list/List";
 import Timeshare from "./pages/timeshare/Timeshare";
+import Checkout from "./pages/checkout/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CustomerAccount from "./pages/customerAccount/CustomerAccount";
@@ -47,6 +48,7 @@ function App() {
                     <Route path="/account" element={<CustomerAccount/>}/>
                     <Route path="/list" element={<List/>}/>
                     <Route path="/list/timeshare" element={<Timeshare/>}/>
+                    <Route path="/list/timeshare/checkout" element={<Checkout/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

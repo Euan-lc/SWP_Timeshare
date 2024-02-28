@@ -68,9 +68,9 @@ export default function CustomerAccount() {
             </div>
             <div className="dashContainer">
                 <IconButton><PersonIcon color="primary" className="dashContainerIcon"/></IconButton>
-                <span>Lastname Example</span>
-                <span>Firstname Example</span>
-                <span>Username Example</span>
+                <span>Lastname : John</span>
+                <span>Firstname : Smith</span>
+                <span>Username : Johnsmith</span>
                 <span>Birthdate Example</span>
             </div>
         </div>

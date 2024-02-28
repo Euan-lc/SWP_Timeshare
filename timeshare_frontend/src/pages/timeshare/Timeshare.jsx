@@ -8,8 +8,10 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from "react-router-dom";
 
 export default function Timeshare() {
+    const navigate = useNavigate();
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
 
@@ -73,11 +75,11 @@ export default function Timeshare() {
           </div>
         )}
         <div className="hotelWrapper">
-          <button className="bookNow">Book</button>
+          <button className="bookNow" onClick={() => navigate("/list/timeshare/checkout")}>Book</button>
           <h1 className="hotelTitle">Tower Street Apartments</h1>
           <div className="hotelAddress">
             <IconButton><LocationOnIcon/></IconButton>
-            <span>Elton St 125</span>
+            <span>Cozy Apartment</span>
           </div>
           <span className="hotelDistance">
             Excellent location
@@ -123,7 +125,7 @@ export default function Timeshare() {
               <h2>
                 <b>$1945</b> (29 nights)
               </h2>
-              <button>Book</button>
+              <button onClick={() => navigate("/list/timeshare/checkout")}>Book</button>
             </div>
           </div>
         </div>
