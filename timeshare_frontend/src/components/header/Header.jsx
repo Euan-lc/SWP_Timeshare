@@ -15,7 +15,6 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import e from "cors";
 
 
 export default function Header({type}) {
@@ -58,15 +57,15 @@ export default function Header({type}) {
                 <div className="headerList">
                     <div className="headerListItem active">
                         <Icon><HotelRoundedIcon color="secondary" className="icon"/></Icon>
-                        <span className="category">Book a Trip</span>
+                        <span className="category">Book a Timeshare</span>
                     </div>
                     <div className="headerListItem">
                         <Icon><SellRoundedIcon color="secondary" className="icon"/></Icon>
-                        <span className="category">Rent my Timeshare</span>
+                        <span className="category">Featured Properties</span>
                     </div>
                     <div className="headerListItem">
                         <Icon><StorefrontRoundedIcon color="secondary" className="icon"/></Icon>
-                        <span className="category">Sell my Timeshare</span>
+                        <span className="category">Recommended Properties</span>
                     </div>
                     <div className="headerListItem">
                         <Icon><StarOutlineRoundedIcon color="secondary" className="icon"/></Icon>
@@ -89,7 +88,7 @@ export default function Header({type}) {
                     </div>
                     <div className="headerSearchItem">
                         <Icon><CalendarMonthRoundedIcon className="searchIcon"/></Icon>
-                        <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}</span>
+                        <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "yyyy-MM-dd")} to ${format(date[0].endDate, "yyyy-MM-dd")}`}</span>
                         {openDate && <DateRange
                             editableDateInputs={true}
                             onChange={(item) => setDate([item.selection])}

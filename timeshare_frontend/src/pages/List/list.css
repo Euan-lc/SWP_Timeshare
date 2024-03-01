@@ -82,3 +82,11 @@
 .listResult{
     flex: 3;
 }
+
+.errorMessage{
+    display: flex;
+    margin-top: 100px;
+    margin-left: 150px;
+    font-weight: bold;
+    color: red;
+}

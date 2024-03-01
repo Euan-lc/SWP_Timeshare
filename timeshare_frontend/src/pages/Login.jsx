@@ -12,11 +12,15 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { auth, provider } from "../config";
-import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebase/config";
+import { signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+import { setUser } from "../store/usersSlice.js";
 
 export default function SignInSide() {
+    const navigate = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -25,6 +29,37 @@ export default function SignInSide() {
             password: data.get('password'),
         });
     };
+
+    // const dispatch = useDispatch();
+    const [userCredentials, setUserCredentials] = React.useState({});
+    const [error, setError] = React.useState("");
+
+    function handleCredentials(e)
+    {
+        setUserCredentials({...userCredentials, [e.target.name]: e.target.value});
+        console.log(userCredentials);
+    }
+
+    function handleLogin(e)
+    {
+        e.preventDefault();
+        setError("");
+        signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
+        .then((userCredential) => {
+            console.log(userCredential.user);
+            // dispatch(setUser({id: userCredential.user.uid, email: userCredential.user.email}));
+        })
+        .catch((error) => {
+            setError(error.message);
+        });
+    }
+    
+    function handlePasswordReset()
+    {
+        const email = prompt("Please enter you email");
+        sendPasswordResetEmail(auth, email);
+        alert("Email sent ! Check your inbox for password reset instructions.");
+    }
 
     const [value, setValue] = React.useState('');
     const handleClick = () => {
@@ -37,8 +72,6 @@ export default function SignInSide() {
     React.useEffect(() => {
         setValue(localStorage.getItem('email'))
     }, [])
-
-    const navigate = useNavigate();
 
     return (
             <Grid container component="main" sx={{ height: '100vh' }}>
@@ -75,6 +108,7 @@ export default function SignInSide() {
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
+                                onChange={(e) => {handleCredentials(e)}}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -85,6 +119,7 @@ export default function SignInSide() {
                                 autoFocus
                             />
                             <TextField
+                                onChange={(e) => {handleCredentials(e)}}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -99,6 +134,7 @@ export default function SignInSide() {
                                 label="Remember me"
                             />
                             <Button
+                                onClick={(e) => {handleLogin(e)}}
                                 type="submit"
                                 fullWidth
                                 variant="contained"
@@ -106,18 +142,24 @@ export default function SignInSide() {
                             >
                                 Sign In
                             </Button>
+                            {
+                            error &&
+                            <div className="error">
+                                {error}
+                            </div>
+                            }
                             <div>
                                 {value ? navigate("/") :
                                 <button onClick={handleClick}>Sign In with Google</button>}
                             </div>
                             <Grid container>
                                 <Grid item xs>
-                                    <Link href="#" variant="body2">
+                                    <Link onClick={handlePasswordReset} href="#" variant="body2">
                                         Forgot password?
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">
+                                    <Link onClick={() => navigate("/register")} href="#" variant="body2">
                                         {"Don't have an account? Sign Up"}
                                     </Link>
                                 </Grid>

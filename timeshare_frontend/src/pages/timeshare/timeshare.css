@@ -28,11 +28,11 @@
   }
   
   .hotelTitle {
-    font-size: 24px;
+    font-size: 40 px;
   }
   
   .hotelAddress {
-    font-size: 12px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -61,6 +61,8 @@
   .hotelImg {
     width: 100%;
     object-fit: cover;
+    height: 250px;
+    padding: 3px;
     cursor: pointer;
   }
   

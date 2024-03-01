@@ -4,13 +4,14 @@ import {ThemeProvider, createTheme} from '@mui/material/styles';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import List from "./pages/list/List";
-import Timeshare from "./pages/timeshare/Timeshare";
+import Timeshare from "./pages/timeshare/Timeshare2.jsx";
 import Checkout from "./pages/checkout/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CustomerAccount from "./pages/customerAccount/CustomerAccount";
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
+import { useSelector } from "react-redux";
 
 const clientId = "122285275633-uldisg6noor0qau5shbh6hmc5j6mmtai.apps.googleusercontent.com"
 

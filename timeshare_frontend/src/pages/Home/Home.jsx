@@ -12,6 +12,8 @@ import {Featured, Featured2} from "../../components/featured/FeaturedList";
 import Popular from "../../components/popularList/PopularList";
 import Recommended from "../../components/recommended/RecommendedList";
 import Footer from "../../components/Footer";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Home() {
     return (
