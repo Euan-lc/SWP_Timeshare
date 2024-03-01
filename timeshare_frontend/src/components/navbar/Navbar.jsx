@@ -3,10 +3,15 @@ import "./navbar.css";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import IconButton from '@mui/material/IconButton'
+import IconButton from '@mui/material/IconButton';
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/config";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/usersSlice";
 
 export default function Navbar() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
@@ -31,6 +36,16 @@ export default function Navbar() {
         auth.signOut();
     };
 
+    function handleLogOut() {
+        if (window.confirm("Are you sure you want to log out?")) {
+            signOut(auth).then(() => {
+                dispatch(setUser(null));
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+    }
+
     return (
         <div className="navbar">
             <div className="navContainer">
@@ -38,7 +53,7 @@ export default function Navbar() {
                 <div className="navItems">
                     {!isLoggedIn && <button onClick={() => navigate("/register")} className="navButton">Register</button>}
                     {!isLoggedIn && <button onClick={() => navigate("/login")} className="navButton">Login</button>}
-                    {isLoggedIn && <button onClick={logout} className="navButton">Logout</button>}
+                    {isLoggedIn && <button onClick={handleLogOut} className="navButton">Logout</button>}
                     {isLoggedIn && <IconButton><AccountCircleIcon onClick={() => navigate("/account")} className="navIcon"/></IconButton>}
                 </div>
             </div>

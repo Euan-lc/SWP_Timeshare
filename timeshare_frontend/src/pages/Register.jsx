@@ -14,8 +14,7 @@ import Typography from '@mui/material/Typography';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-// import { useDispatch } from "react-redux";
-import { setUser } from "../store/usersSlice.js";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
@@ -30,7 +29,6 @@ export default function Register() {
         });
     };
 
-    // const dispatch = useDispatch();
     const [userCredentials, setUserCredentials] = React.useState({});
     const [error, setError] = React.useState("");
 
@@ -44,13 +42,10 @@ export default function Register() {
         setError("");
         e.preventDefault();
         createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
-        .then((userCredential) => {
-            console.log(userCredential.user);
-            // dispatch(setUser({id: userCredential.user.uid, email: userCredential.user.email}));
-        })
         .catch((error) => {
             setError(error.message);
         });
+        navigate("/");
     }
 
     console.log(auth);

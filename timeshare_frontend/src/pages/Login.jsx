@@ -13,13 +13,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { auth, provider } from "../firebase/config";
-import { signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../store/usersSlice.js";
 
 export default function SignInSide() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -30,14 +31,25 @@ export default function SignInSide() {
         });
     };
 
-    // const dispatch = useDispatch();
     const [userCredentials, setUserCredentials] = React.useState({});
     const [error, setError] = React.useState("");
+
+    React.useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          if (user) {
+            dispatch(setUser({id: user.uid, email: user.email}));
+            setValue(user.email);
+          } else {
+            dispatch(setUser(null));
+          }
+        });
+
+        return unsubscribe;
+      }, [dispatch]);
 
     function handleCredentials(e)
     {
         setUserCredentials({...userCredentials, [e.target.name]: e.target.value});
-        console.log(userCredentials);
     }
 
     function handleLogin(e)
@@ -45,10 +57,6 @@ export default function SignInSide() {
         e.preventDefault();
         setError("");
         signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
-        .then((userCredential) => {
-            console.log(userCredential.user);
-            // dispatch(setUser({id: userCredential.user.uid, email: userCredential.user.email}));
-        })
         .catch((error) => {
             setError(error.message);
         });

@@ -23,4 +23,8 @@ app.use('/api/review', reviewRouter);
 
 app.listen(process.env.PORT, () => console.log(`Server is listening on port ${process.env.PORT}.`));
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the API!');
+});
+
 module.exports = app;
