@@ -11,25 +11,17 @@
     margin: 50px 20px;
     position: absolute;
     left: 580px;
+    box-shadow: none;
 }
 .sort-bar{
     width: 750px;
     height: 50px;
-    /* background-color: lightblue; */
     margin-bottom: 20px;
     display: flex;
     justify-content: flex-end;
-    
-    /* flex-direction: row; */
+   
 }
-/* .sort-bar .blank{
-    background-color: lightcoral;
-    height: 100%;
-    flex: 2;
-} */
 .sort-bar .sorting{
-    /* background-color: lightpink; */
-    /* flex: 1.5; */
     display: flex;
     justify-content: flex-end;
 }

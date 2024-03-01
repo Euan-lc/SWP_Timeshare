@@ -44,13 +44,13 @@ const Sorting = () =>{
 export default function SearchList() {
     const nav = useNavigate();
 
-    const ShowTimeshare = (id) =>()=>{
-        nav('timeshare/'+id);
+    const ShowTimeshare  =()=>{
+        nav('/timeshare');
     }
 
-    const ShowPayment = (id)=>()=>{
+    const ShowPayment =()=>{
         // event.stopPropagation()
-        nav(`payment/${id}`);
+        nav(`/payment`);
     }
 
 
@@ -66,10 +66,10 @@ export default function SearchList() {
             {Timeshares.map((timeshare)=>(
                 <div className="card" key={timeshare.id}>
                 <div className='timeshare-button'>
-                    <div className="img-timeshare" onClick={ShowTimeshare(timeshare.id)}>
+                    <div className="img-timeshare" onClick={ShowTimeshare}>
                     <img src={timeshare.img} alt={timeshare.imgAlt} />
                     </div>
-                    <div className="info-timeshare"onClick={ShowTimeshare(timeshare.id)}>
+                    <div className="info-timeshare"onClick={ShowTimeshare}>
                          <div className="info">
                                 <h1>{timeshare.name}</h1>
                             <Rating name="half-rating-read" defaultValue={timeshare.rating} precision={0.1} readOnly /><br/>
@@ -89,7 +89,7 @@ export default function SearchList() {
                          </div>
                     </div>
                     <div className="box-timeshare">
-                        <div className="price-timeshare" onClick={ShowTimeshare(timeshare.id)}>
+                        <div className="price-timeshare" onClick={ShowTimeshare}>
                             <p className='price'>
                                 <span className='icon'><AttachMoneyIcon fontSize='large'/></span>
                                 <span className='text'>{timeshare.price}</span>
@@ -97,7 +97,7 @@ export default function SearchList() {
                             <p style={{fontSize:16, paddingLeft:25}}>for <span style={{fontSize:25}}>1</span> night</p>
                         </div>
                         <div className="book-timeshare">
-                            <button className='book-button'>
+                            <button className='book-button' onClick={ShowPayment}>
                                 Book
                             </button>
                         </div>

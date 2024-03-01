@@ -3,13 +3,13 @@
     --background-color: #fff; /* Set default background-color value */
   }
 
-#car-detail{
+#timeshare-detail{
     width: 100%;
-    min-width: 100vw;
-    min-height: 100vh;
+    /* min-width: 100vw;
+    min-height: 100vh; */
 }
 
-#car-detail>.body{
+#timeshare-detail>.body{
     padding: 30px 100px;
     display: flex;
     flex-direction: column;
@@ -18,14 +18,14 @@
 }
 
 
-#car-detail>.body>.img-container>.item-1{
+#timeshare-detail>.body>.img-container>.item-1{
     grid-area: main;
     height: 630px;
     width: auto;
     border-radius: var(--border-radius);
 }
 
-#car-detail>.body>.img-container>.item-2{
+#timeshare-detail>.body>.img-container>.item-2{
     grid-area: item1;
     height: 200px;
     width: 295px;
@@ -33,7 +33,7 @@
     object-fit: cover;
 }
 
-#car-detail>.body>.img-container>.item-3{
+#timeshare-detail>.body>.img-container>.item-3{
     grid-area: item2;
     height: 200px;
     width: 295px;
@@ -41,7 +41,7 @@
     object-fit: cover;
 }
 
-#car-detail>.body>.img-container>.item-4{
+#timeshare-detail>.body>.img-container>.item-4{
     grid-area: item3;
     height: 200px;
     width: 295px;
@@ -49,7 +49,7 @@
     object-fit: cover;
 }
 
-#car-detail>.body>.img-container{
+#timeshare-detail>.body>.img-container{
     display: grid;
     grid-template-areas: 
     'main item1'
@@ -59,7 +59,7 @@
     padding-bottom: 30px ;
 }
 
-#car-detail>.body>.timeshare-info{
+#timeshare-detail>.body>.timeshare-info{
     width: 100%;
     padding: 0 100px;
     display: grid;
@@ -68,50 +68,50 @@
 }
 
 
-#car-detail>.body>.timeshare-info>.info{
+#timeshare-detail>.body>.timeshare-info>.info{
     padding-right: 70px;
 }
 
-#car-detail>.body>.timeshare-info>.info>.name p{
+#timeshare-detail>.body>.timeshare-info>.info>.name p{
     font-weight: 600;
     font-size: 36px;
 }
 
-#car-detail>.body>.timeshare-info>.info>.rating{
+#timeshare-detail>.body>.timeshare-info>.info>.rating{
     display: flex;
     align-items: center;
     padding-bottom: 10px;
 }
 
-#car-detail>.body>.timeshare-info>.info>.rating p{
+#timeshare-detail>.body>.timeshare-info>.info>.rating p{
     font-size: 18px;
     color: #b2b2b2;
 }
 
-#car-detail>.body>.timeshare-info>.info>.character{
+#timeshare-detail>.body>.timeshare-info>.info>.character{
     padding: 15px 0;
 }
 
-#car-detail>.body>.timeshare-info>.info>.character>.character-container{
+#timeshare-detail>.body>.timeshare-info>.info>.character>.character-container{
     display: flex;
     justify-content: space-around;
 }
 
-#car-detail>.body>.timeshare-info>.info>.character>.char p{
+#timeshare-detail>.body>.timeshare-info>.info>.character>.char p{
     font-size: 20px;
     font-weight: 500;
 }
 
-#car-detail>.body>.timeshare-info>.info>.character>.char>.tittle p{
+#timeshare-detail>.body>.timeshare-info>.info>.character>.char>.tittle p{
     font-size: 20px;
     color: #b2b2b2;
 }
 
-#car-detail>.body>.timeshare-info>.info>.amenities{
+#timeshare-detail>.body>.timeshare-info>.info>.amenities{
     padding: 15px 0;
 }
 
-#car-detail>.body>.timeshare-info>.price{
+#timeshare-detail>.body>.timeshare-info>.price{
     display: flex;
     flex-direction: column;
     background-color: rgb(218, 238, 255);
@@ -121,34 +121,34 @@
     margin-left: -50px ;
 }
 
-#car-detail>.body>.timeshare-info>.price h1{
+#timeshare-detail>.body>.timeshare-info>.price h1{
     padding-bottom: 15px;
 }
 
-#car-detail>.body>.timeshare-info>.price>.period{
+#timeshare-detail>.body>.timeshare-info>.price>.period{
     display: flex;
     background-color: #fff;
     border-radius: 10px;
     border: 0.5px solid #b2b2b2
 }
 
-#car-detail>.body>.timeshare-info>.price>.period>.book,
-#car-detail>.body>.timeshare-info>.price>.period>.return{
+#timeshare-detail>.body>.timeshare-info>.price>.period>.book,
+#timeshare-detail>.body>.timeshare-info>.price>.period>.return{
     padding: 8px
 }
 
-#car-detail>.body>.timeshare-info>.price>.period>.book{
+#timeshare-detail>.body>.timeshare-info>.price>.period>.book{
     padding-right: 20px;
 }
 
-#car-detail>.body>.timeshare-info>.price>.period>.vertical-line{
+#timeshare-detail>.body>.timeshare-info>.price>.period>.vertical-line{
     height: auto;
     width: 1px;
     border-left: 1px solid #b2b2b2; 
     margin: 0;
 }
 
-#car-detail>.body>.timeshare-info>.price>.night-time{
+#timeshare-detail>.body>.timeshare-info>.price>.night-time{
     background-color: #fff;
     border-radius: 10px;
     border: 0.5px solid #b2b2b2;
@@ -157,41 +157,41 @@
     padding: 8px;
 }
 
-#car-detail>.body>.timeshare-info>.price>.night-time>.night{
+#timeshare-detail>.body>.timeshare-info>.price>.night-time>.night{
     font-size: 18px;
     font-weight: 500;
 }
 
-#car-detail>.body>.timeshare-info>.price>.charge-section{
+#timeshare-detail>.body>.timeshare-info>.price>.charge-section{
 
     line-height: 25px;
     font-weight: 100;
     padding: 10px 8px;
 }
 
-#car-detail>.body>.timeshare-info>.price>.charge-section div{
+#timeshare-detail>.body>.timeshare-info>.price>.charge-section div{
     display: flex;
     justify-content: space-between;
 }
 
 
-#car-detail>.body>.timeshare-info>.price>.total{
+#timeshare-detail>.body>.timeshare-info>.price>.total{
     display: flex;
     justify-content: space-between;
     padding: 10px 8px
 }
 
-#car-detail>.body>.timeshare-info>.price>.voucher div{
+#timeshare-detail>.body>.timeshare-info>.price>.voucher div{
     display: flex;
 }
 
-#car-detail>.body>.timeshare-info>.price>.voucher{
+#timeshare-detail>.body>.timeshare-info>.price>.voucher{
     display: flex;
     justify-content: space-between;
     padding: 10px 8px   
 }
 
-#car-detail>.body>.timeshare-info>.price>.payment{
+#timeshare-detail>.body>.timeshare-info>.price>.payment{
     display: flex;
     justify-content: space-between;
     font-weight: 600;

@@ -30,9 +30,9 @@ function App() {
                     <Route path='login' element={<Login/>}/>
                     <Route path='register' element={<Register/>}/>
                     <Route path='/search' element={<SearchPage/>}/>
-                    <Route path='timeshare/:id' element={<DetailTimeshare/>}/>
+                    <Route path='/timeshare' element={<DetailTimeshare/>}/>
                     {/* <Route path='payment/:id' element={<PaymentEx/>}/> */}
-                    <Route path='payment/:id' element={<PaymentPage/>}/> 
+                    <Route path='/payment' element={<PaymentPage/>}/> 
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

@@ -9,7 +9,7 @@ import la1 from '../../images/la1.jpg'
 import la2 from '../../images/la2.jpg'
 import la3 from '../../images/la3.jpg'
 import la4 from '../../images/la4.jpg'
-import "./detailTimeshare.css";
+import './detail.css'
 import Header from "../header/Header";
 import { useNavigate } from "react-router-dom";
 
@@ -20,12 +20,12 @@ export default function DetailTimeShare(){
         window.scrollTo(0, 0)
     },[])
 
-    const ShowPayment = (id) => () =>{
-        nav(`payment/${id}`);
+    const ShowPayment  = () =>{
+        nav(`/payment`);
     }
 
     return(
-        <div id="car-detail">
+        <div id="timeshare-detail" className="timeshare-detail">
             <Header/>
             <div className="body">
                 <div className="img-container">
@@ -130,7 +130,7 @@ export default function DetailTimeShare(){
                                 <span style={{verticalAlign:'middle'}}>1240</span>
                             </p>
                         </div>
-                        <Button variant="contained" onClick={ShowPayment(1)}>Pay</Button>
+                        <Button variant="contained" onClick={ShowPayment}>Pay</Button>
                     </div>
                 </div>
             </div>
