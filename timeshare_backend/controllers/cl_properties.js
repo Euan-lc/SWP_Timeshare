@@ -18,6 +18,7 @@ exports.GetAllProperties = async (req, res) => {
                                         WHERE (NOT (c.startDay <= DATE('${end}') AND c.endDay >= DATE('${start}'))
                                             OR c.contractId IS NULL)
                                             ${req.query.price ? 'AND p.price between ' + req.query.price[1].split(':')[1] + ' AND ' + req.query.price[0].split(':')[1] : ''}
+                                            ${req.query.location ? "AND p.address = '" + req.query.location + "'" : ''}
                                         GROUP BY p.timeshareId
                                         ORDER BY ${sort[1]} ${sort[0]}
                                         LIMIT ${limit}
@@ -68,4 +69,14 @@ exports.AddNewProperty = async (req, res) => {
             res.send()
         }
     )
+}
+
+exports.RemoveProperty = async (req, res) => {
+    pool.query(`DELETE FROM Properties where timeshareId = ${req.query.id}`, (err, result) => {
+        if(err) {
+            console.error(err);
+            return;
+        }
+        res.send()
+    })
 }
