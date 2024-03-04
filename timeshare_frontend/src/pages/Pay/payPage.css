@@ -1,53 +1,71 @@
-
-
-.container {
-    max-width: 600px; /* Độ rộng tối đa của container */
-    text-align: center;/* Canh giữa container */
-    padding: 20px;/* Padding bên trong container */
-    background-color: #ffffff; /* Màu nền của container */
-    border-radius: 10px; /* Bo tròn viền của container */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
-    
-  }
-.button{
-    padding: 10px 20px;
-    background-color: blue;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin: 10px;
+/* Style cho các phần tử chính */
+form {
+  width: 400px;
+  margin: 0 auto;
+  border: 2px solid #ccc; /* Định dạng viền */
+  border-radius: 5px; /* Định dạng góc cong của viền */
+  padding: 20px; /* Khoảng cách giữa nội dung và viền */
+  width: 500px; /* Định dạng chiều rộng của form */
 }
 
-  .container h2 {
-    font-size: 24px; /* Cỡ chữ của tiêu đề */
-    margin-bottom: 20px; /* Khoảng cách dưới của tiêu đề */
-    color: #333333; /* Màu chữ của tiêu đề */
-  }
-  .container form {
-    display: flex;
-    flex-direction: column; /* Xếp thành phần con theo chiều dọc */
-    text-align: left;
-    margin: 0;
-  }
-  .field{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  .field label{
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-  .field input{
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  .name-on-card-input:focus {
-    outline: none;
-    border-color: #007bff; /* Màu sắc khi input được focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Hiệu ứng khi input được focus */
-  }
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 100px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
