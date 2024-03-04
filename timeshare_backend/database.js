@@ -7,7 +7,12 @@ const pool = mysql.createPool({
     password: process.env.MYSQL_PASS,
     database: process.env.MYSQL_DB,
     connectionLimit: 10,
-    supportBigNumbers: true
+    supportBigNumbers: true,
+    port:process.env.SQL_PORT,
+    ssl: {
+        rejectUnauthorized: true,
+        ca : process.env.CA_CERT
+    }
 });
 
 module.exports = pool;

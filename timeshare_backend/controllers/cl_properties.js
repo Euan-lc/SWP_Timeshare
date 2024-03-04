@@ -37,13 +37,19 @@ exports.GetAllProperties = async (req, res) => {
 
 exports.GetSingleProperty = async (req, res) => {
 
-    pool.query(`Select * from Properties where Properties.timeshareId = ${req.query.id}`, (err, result) => {
+    pool.query(`Select * from Properties join Gallery on Properties.timeshareId = Gallery.timeshareId where Properties.timeshareId = ${req.query.id}`, (err, result) => {
         if (err) {
             console.error(err);
             return;
         }
         // rows fetch
-        res.send(result);
+        let property = result[0]
+        property.images = [];
+        for(let i of result){
+            property.images.push(i.image);
+        }
+        delete property.image;
+        res.send(property);
     });
 }
 
@@ -69,6 +75,10 @@ exports.AddNewProperty = async (req, res) => {
             res.send()
         }
     )
+}
+
+exports.AddImageToGallery = async (req, res) => {
+    pool.query(`INSERT INTO Gallery (timeshareId, image) VALUES ()`)
 }
 
 exports.RemoveProperty = async (req, res) => {
