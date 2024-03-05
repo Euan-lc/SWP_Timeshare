@@ -1,5 +1,7 @@
 const {pool} = require('../database')
 
+
+
 exports.GetAllProperties = async (req, res) => {
     var limit = parseInt(req.query.limit) ? req.query.limit : 10;
     var offset = parseInt(req.query.offset) ? req.query.offset : 0;
@@ -37,12 +39,13 @@ exports.GetAllProperties = async (req, res) => {
 
 exports.GetSingleProperty = async (req, res) => {
 
-    pool.query(`Select * from Properties join Gallery on Properties.timeshareId = Gallery.timeshareId where Properties.timeshareId = ${req.query.id}`, (err, result) => {
+    pool.query(`Select * from Properties left join Gallery on Properties.timeshareId = Gallery.timeshareId where Properties.timeshareId = ${req.query.id}`, (err, result) => {
         if (err) {
             console.error(err);
             return;
         }
         // rows fetch
+        console.log(result)
         let property = result[0]
         property.images = [];
         for(let i of result){
