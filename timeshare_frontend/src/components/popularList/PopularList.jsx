@@ -10,21 +10,21 @@ export default function PopularList() {
                 <img src={Hanoi} alt="" className="pListImg" />
                 <div className="pListTitles">
                     <h1>Ho Chi Minh</h1>
-                    <h2>180 properties</h2>
+                    <h2>Visit this beautiful city</h2>
                 </div>
             </div>
             <div className="pListItem">
                 <img src={HoChiMinh} alt="" className="pListImg" />
                 <div className="pListTitles">
                     <h1>Hanoi</h1>
-                    <h2>256 properties</h2>
+                    <h2>Visit the capital city</h2>
                 </div>
             </div>
             <div className="pListItem">
                 <img src={DaLat} alt="" className="pListImg" />
                 <div className="pListTitles">
                     <h1>Da Lat</h1>
-                    <h2>150 properties</h2>
+                    <h2>Excellent for finding prosperity</h2>
                 </div>
             </div>
         </div>

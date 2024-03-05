@@ -17,6 +17,7 @@ export default function Timeshare() {
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
     const [property] = useState(location.state.property);
+    const [timeshareId] = useState(location.state.timeshareId);
     const [date] = useState(location.state.date);
     const [info] = useState(location.state.info);
 
@@ -90,7 +91,7 @@ export default function Timeshare() {
           </div>
         )}
         <div className="hotelWrapper">
-          <button className="bookNow" onClick={() => navigate("/list/timeshare/checkout")}>Book</button>
+          <button className="bookNow" onClick={() => navigate("/list/timeshare/checkout", { state: { property, timeshareId, date, info } })}>Book</button>
           <h1 className="hotelTitle">{property.name}</h1>
           <div className="hotelAddress">
             <IconButton><LocationOnIcon/></IconButton>
@@ -130,7 +131,7 @@ export default function Timeshare() {
               <h2>
                 <b>${totalDays * property.price}</b> ({totalDays} night(s))
               </h2>
-              <button onClick={() => navigate("/list/timeshare/checkout")}>Book</button>
+              <button onClick={() => navigate("/list/timeshare/checkout", { state: { property, timeshareId, date, info } })}>Book</button>
             </div>
           </div>
         </div>

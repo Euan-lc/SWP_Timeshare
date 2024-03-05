@@ -1,5 +1,4 @@
 import "./searchItem.css";
-import La1 from "../../images/la1.jpg"
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
@@ -15,7 +14,7 @@ export default function SearchItem({ timeshareId, info, date }) {
                     throw new Error('Failed to fetch property details');
                 }
                 const data = await response.json();
-                setProperty(data[0]);
+                setProperty(data);
             } catch (error) {
                 console.error('Error fetching properties:', error);
             }
@@ -30,10 +29,10 @@ export default function SearchItem({ timeshareId, info, date }) {
             src={property.img}
             alt=""
             className="siImg"
-            onClick={() => navigate("/list/timeshare", { state: { property, info, date } })}
+            onClick={() => navigate("/list/timeshare", { state: { property, timeshareId, info, date } })}
             />
             <div className="siDesc">
-                <h1 className="siTitle" onClick={() => navigate("/list/timeshare", { state: { property, info, date } })}>{property.name}</h1>
+                <h1 className="siTitle" onClick={() => navigate("/list/timeshare", { state: { property, timeshareId, info, date } })}>{property.name}</h1>
                 <span className="siDistance">{property.address}</span>
                 <span className="siTaxiOp">{property.description}</span>
                 <span className="siSubtitle">Capacity: {property.capacity}</span>
@@ -49,7 +48,7 @@ export default function SearchItem({ timeshareId, info, date }) {
                 <div className="siDetailsText">
                     <span className="siPrice">${property.price}</span>
                     <span className="siPeriod">per night</span>
-                    <button className="siButton" onClick={() => navigate("/list/timeshare", { state: { property, info, date } })}>Book</button>
+                    <button className="siButton" onClick={() => navigate("/list/timeshare", { state: { property, timeshareId, info, date } })}>Book</button>
                 </div>
             </div>
         </div>

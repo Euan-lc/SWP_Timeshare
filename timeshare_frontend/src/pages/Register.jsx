@@ -14,7 +14,6 @@ import Typography from '@mui/material/Typography';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
@@ -36,6 +35,8 @@ export default function Register() {
     {
         setUserCredentials({...userCredentials, [e.target.name]: e.target.value});
     }
+
+    // Send UID to backend
 
     function handleSignUp(e)
     {

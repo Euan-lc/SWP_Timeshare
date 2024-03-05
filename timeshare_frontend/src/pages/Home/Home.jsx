@@ -6,9 +6,10 @@
 // // import Box from '@mui/material/Box';
 // import Container from '@mui/material/Container';
 import "./home.css";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
-import {Featured, Featured2} from "../../components/featured/FeaturedList";
+import { Featured, Featured2 } from "../../components/featured/FeaturedList";
 import Popular from "../../components/popularList/PopularList";
 import Recommended from "../../components/recommended/RecommendedList";
 import Footer from "../../components/Footer";
@@ -16,8 +17,27 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function Home() {
-    return (
+    const [properties, setProperties] = useState([]);
 
+    useEffect(() => {
+        const fetchProperties = async () => {
+            try {
+                const baseUrl = `https://swp-timeshare-back.vercel.app/api/property/all?limit=4&offset=0&sort_by=asc:price`;
+                const response = await fetch(`${baseUrl}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch properties');
+                }
+                const data = await response.json();
+                setProperties(data);
+            } catch (error) {
+                console.error('Error fetching properties:', error);
+            }
+        };
+    
+        fetchProperties();
+    }, []);
+
+    return (
         <div>
             <Navbar/>
             <Header/>
@@ -27,33 +47,9 @@ export default function Home() {
                 <h1 className="homeTitle">Popular properties</h1>
                 <Popular/>
                 <h1 className="homeTitle">Recommended properties</h1>
-                <Recommended/>
+                <Recommended properties={properties}/>
             </div>
             <Footer/>
         </div>
-
-
-
-
-        // <Container className="homePageContainer" sx={{ flexGrow: 1}} alignItems="center" justifyContent="center">
-        //     <SearchBar />
-        //     <Typography variant={'h3'} type={'center'}>Top Resorts</Typography>
-        //     <Stack direction='row' spacing={2} sx={{flexgrow: 1}} justifyContent="center">
-        //         <PropertyCard img={property1}
-        //                       imgAlt={'there should be a scantily dressed woman here'}
-        //                       name={'Scantily clad woman'}
-        //                       location={'Da Nang, Viet Nam'}
-        //                       price={500}
-        //                       rating={5}
-        //         />
-        //         <PropertyCard img={property2}
-        //                       imgAlt={'there should be a nice pool here'}
-        //                       name={'Pool Side'}
-        //                       location={'HCMC, Viet Nam'}
-        //                       price={500}
-        //                       rating={5}
-        //         />
-        //     </Stack>
-        // </Container>
     );
 };

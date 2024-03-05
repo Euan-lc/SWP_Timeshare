@@ -49,6 +49,7 @@ function App() {
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/account" element={<CustomerAccount/>}/>
+                    <Route path="/account/mytimeshares" element={<CustomerAccount/>}/>
                     <Route path="/list" element={<List/>}/>
                     <Route path="/list/timeshare" element={<Timeshare/>}/>
                     <Route path="/list/timeshare/checkout" element={<Checkout/>}/>

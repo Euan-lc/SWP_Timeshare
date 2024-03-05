@@ -49,7 +49,7 @@ export default function Navbar() {
     return (
         <div className="navbar">
             <div className="navContainer">
-                <span className="logo">Timeshare</span>
+                <span className="logo" onClick={() => navigate("/")}>Timeshare</span>
                 <div className="navItems">
                     {!isLoggedIn && <button onClick={() => navigate("/register")} className="navButton">Register</button>}
                     {!isLoggedIn && <button onClick={() => navigate("/login")} className="navButton">Login</button>}

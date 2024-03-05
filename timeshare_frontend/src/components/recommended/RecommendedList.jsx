@@ -1,53 +1,62 @@
 import "./recommendedList.css";
-import La1 from "../../images/la1.jpg";
-import La2 from "../../images/la2.jpg";
-import Lv1 from "../../images/lv1.jpg";
-import Lv2 from "../../images/lv2.jpg"
+import React, { useState, useEffect } from "react";
 
+const getRatingAdjective = (rating) => {
+    if (rating >= 5) {
+        return "Perfect";
+    } else if (rating >= 4.5) {
+        return "Excellent";
+    } else if (rating >= 4) {
+        return "Very Good";
+    } else if (rating >= 3) {
+        return "Good";
+    } else if (rating >= 2) {
+        return "Fair";
+    } else {
+        return "Poor";
+    }
+};
 
-export default function RecommendedList() {
+export default function RecommendedList({ properties }) {
+
+    const [propertyDetails, setPropertyDetails] = useState([]);
+
+    useEffect(() => {
+        const fetchPropertyDetails = async () => {
+            const detailedProperties = await Promise.all(
+                properties.map(async (property) => {
+                    const response = await fetch(`https://swp-timeshare-back.vercel.app/api/property?id=${property.timeshareId}`);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch property details');
+                    }
+                    const data = await response.json();
+                    return { ...property, ...data };
+                })
+            );
+            setPropertyDetails(detailedProperties);
+        };
+
+        fetchPropertyDetails();
+    }, [properties]);
+
     return (
         <div className="rp">
-            <div className="rpItem">
-                <img src={La1} alt="" className="rpImg" />
-                <span className="rpName">Luxury Appartment</span>
-                <span className="rpCity">Ho Chi Minh</span>
-                <span className="rpPrice">from $499 to $4,286/night</span>
-                <div className="rpRating">
-                    <button>4.3</button>
-                    <span>Very Good</span>
+            {propertyDetails.map((property) => (
+                <div key={property.timeshareId} className="rpItem">
+                    <img
+                        src={property.img}
+                        alt={property.name}
+                        className="rpImg"
+                    />
+                    <span className="rpName">{property.name}</span>
+                    <span className="rpCity">{property.address}</span>
+                    <span className="rpPrice">from ${property.price}/night</span>
+                    <div className="rpRating">
+                        <button>{parseFloat(property.rating || "5").toFixed(1)}</button>
+                        <span>{getRatingAdjective(parseFloat(property.rating || "5"))}</span>
+                    </div>
                 </div>
-            </div>
-            <div className="rpItem">
-                <img src={Lv1} alt="" className="rpImg" />
-                <span className="rpName">Luxury Villa</span>
-                <span className="rpCity">Da Nang</span>
-                <span className="rpPrice">from $199 to $3,267/night</span>
-                <div className="rpRating">
-                    <button>4.6</button>
-                    <span>Excellent</span>
-                </div>
-            </div>
-            <div className="rpItem">
-                <img src={La2} alt="" className="rpImg" />
-                <span className="rpName">Luxury Appartment</span>
-                <span className="rpCity">Da Lat</span>
-                <span className="rpPrice">from $299 to $2,413/night</span>
-                <div className="rpRating">
-                    <button>4.5</button>
-                    <span>Excellent</span>
-                </div>
-            </div>
-            <div className="rpItem">
-                <img src={Lv2} alt="" className="rpImg" />
-                <span className="rpName">Luxury Villa</span>
-                <span className="rpCity">Phu Quoc</span>
-                <span className="rpPrice">from $399 to $5,000/night</span>
-                <div className="rpRating">
-                    <button>4.8</button>
-                    <span>Perfect</span>
-                </div>
-            </div>
+            ))}
         </div>
     )
 }
