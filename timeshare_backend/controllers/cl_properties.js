@@ -1,6 +1,21 @@
 const {pool} = require('../database')
 
-
+exports.ReserveProperty = async (req, res) => {
+    let payload = []
+    for(let i = 0; i < req.query.numYears; i ++){
+        payload.push(`(${req.query.timeshareId}, ${req.query.customerId}, '${(parseInt(req.query.startYear) + i ) + '-' + req.query.startDay}', '${(parseInt(req.query.startYear) + i ) + '-' + req.query.endDay}', ${parseInt(req.query.startYear) + i})`)
+    }
+    console.log(`INSERT INTO Contracts (timeshareId, customerId, startDay, endDay, year) VALUES
+                    ${payload.join()};`)
+    pool.query(`INSERT INTO Contracts (timeshareId, customerId, startDay, endDay, year) VALUES
+                    ${payload.join()};`, (err, result) => {
+        if(err){
+            console.error(err)
+            return
+        }
+        res.send()
+    })
+}
 
 exports.GetAllProperties = async (req, res) => {
     var limit = parseInt(req.query.limit) ? req.query.limit : 10;

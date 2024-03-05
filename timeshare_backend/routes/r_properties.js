@@ -7,5 +7,6 @@ router.get('/locations', propertyCtrl.GetLocations);
 router.get('/', propertyCtrl.GetSingleProperty);
 router.post('/', propertyCtrl.AddNewProperty);
 router.delete('/', propertyCtrl.RemoveProperty);
+router.post('/reserve', propertyCtrl.ReserveProperty);
 
 module.exports = router;
