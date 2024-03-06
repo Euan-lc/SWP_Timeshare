@@ -1,0 +1,263 @@
+[
+ {
+   "address": "Da Nang",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock1",
+   "capacity": 3,
+   "numberBedrooms": 2,
+   "size": 420,
+   "price": 100
+ },
+ {
+   "address": "Da Nang",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock2",
+   "capacity": 2,
+   "numberBedrooms": 3,
+   "size": 69,
+   "price": 200
+ },
+ {
+   "address": "Da Nang",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock3",
+   "capacity": 5,
+   "numberBedrooms": 4,
+   "size": 239,
+   "price": 300
+ },
+ {
+   "address": "Da Nang",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock4",
+   "capacity": 4,
+   "numberBedrooms": 5,
+   "size": 80,
+   "price": 400
+ },
+ {
+   "address": "Da Nang",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock5",
+   "capacity": 8,
+   "numberBedrooms": 1,
+   "size": 23,
+   "price": 500
+ },
+ {
+   "address": "Da Nang",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock6",
+   "capacity": 7,
+   "numberBedrooms": 2,
+   "size": 53,
+   "price": 600
+ },
+ {
+   "address": "Da Nang",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock7",
+   "capacity": 4,
+   "numberBedrooms": 3,
+   "size": 59,
+   "price": 700
+ },
+ {
+   "address": "Da Nang",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock8",
+   "capacity": 5,
+   "numberBedrooms": 4,
+   "size": 23,
+   "price": 800
+ },
+ {
+   "address": "Da Nang",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock9",
+   "capacity": 3,
+   "numberBedrooms": 5,
+   "size": 54,
+   "price": 900
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock10",
+   "capacity": 2,
+   "numberBedrooms": 1,
+   "size": 435,
+   "price": 1000
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock11",
+   "capacity": 5,
+   "numberBedrooms": 2,
+   "size": 234,
+   "price": 1100
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock12",
+   "capacity": 4,
+   "numberBedrooms": 3,
+   "size": 54,
+   "price": 1200
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock13",
+   "capacity": 8,
+   "numberBedrooms": 4,
+   "size": 243,
+   "price": 1300
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock14",
+   "capacity": 7,
+   "numberBedrooms": 5,
+   "size": 54,
+   "price": 1400
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock15",
+   "capacity": 4,
+   "numberBedrooms": 1,
+   "size": 34,
+   "price": 1500
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock16",
+   "capacity": 5,
+   "numberBedrooms": 2,
+   "size": 43,
+   "price": 1600
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock17",
+   "capacity": 3,
+   "numberBedrooms": 3,
+   "size": 54,
+   "price": 1700
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock18",
+   "capacity": 2,
+   "numberBedrooms": 4,
+   "size": 23,
+   "price": 1800
+ },
+ {
+   "address": "Ho Chi Minh",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock19",
+   "capacity": 5,
+   "numberBedrooms": 5,
+   "size": 54,
+   "price": 1900
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock20",
+   "capacity": 4,
+   "numberBedrooms": 1,
+   "size": 43,
+   "price": 2000
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock21",
+   "capacity": 8,
+   "numberBedrooms": 2,
+   "size": 23,
+   "price": 2100
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock22",
+   "capacity": 7,
+   "numberBedrooms": 3,
+   "size": 43,
+   "price": 2200
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock23",
+   "capacity": 4,
+   "numberBedrooms": 4,
+   "size": 54,
+   "price": 2300
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock24",
+   "capacity": 5,
+   "numberBedrooms": 5,
+   "size": 23,
+   "price": 2400
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock25",
+   "capacity": 3,
+   "numberBedrooms": 1,
+   "size": 84,
+   "price": 2500
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock26",
+   "capacity": 2,
+   "numberBedrooms": 2,
+   "size": 54,
+   "price": 2600
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock27",
+   "capacity": 5,
+   "numberBedrooms": 3,
+   "size": 23,
+   "price": 2700
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock28",
+   "capacity": 4,
+   "numberBedrooms": 4,
+   "size": 54,
+   "price": 2800
+ },
+ {
+   "address": "Mekong Delta",
+   "description": "this is a description I guess, I cba writing anything proper but this is a long text I guess so deal with this as a mock value",
+   "name": "mock29",
+   "capacity": 8,
+   "numberBedrooms": 5,
+   "size": 48,
+   "price": 2900
+ }
+]
