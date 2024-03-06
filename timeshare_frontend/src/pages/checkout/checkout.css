@@ -1,0 +1,40 @@
+
+.container {
+  max-width: 600px; /* Độ rộng tối đa của container */
+  margin: 0 auto; /* Canh giữa container */
+  padding: 20px; /* Padding bên trong container */
+  background-color: #ffffff; /* Màu nền của container */
+  border-radius: 10px; /* Bo tròn viền của container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
+}
+
+.container h2 {
+  font-size: 24px; /* Cỡ chữ của tiêu đề */
+  margin-bottom: 20px; /* Khoảng cách dưới của tiêu đề */
+  color: #333333; /* Màu chữ của tiêu đề */
+}
+.container form {
+  display: flex;
+  flex-direction: column; /* Xếp thành phần con theo chiều dọc */
+}
+.field{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.field label{
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.field input{
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.name-on-card-input:focus {
+  outline: none;
+  border-color: #007bff; /* Màu sắc khi input được focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Hiệu ứng khi input được focus */
+}
