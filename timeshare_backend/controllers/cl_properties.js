@@ -26,7 +26,7 @@ exports.GetAllProperties = async (req, res) => {
 
     console.log(req.query)
 
-    let query = `SELECT p.timeshareId, p.name, p.address, p.price, rating
+    let query = `SELECT p.timeshareId, p.name, p.address, p.price, p.img, rating
                                         FROM (SELECT p.*, AVG(r.rating) AS rating
                             FROM Properties p LEFT JOIN Reviews r
                                 ON p.timeshareId = r.timeshareId
