@@ -38,6 +38,7 @@ export default function Navbar() {
 
     function handleLogOut() {
         if (window.confirm("Are you sure you want to log out?")) {
+            navigate("/");
             signOut(auth).then(() => {
                 dispatch(setUser(null));
             }).catch((error) => {

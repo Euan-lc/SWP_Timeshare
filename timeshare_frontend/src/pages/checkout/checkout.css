@@ -6,9 +6,7 @@
   background-color: #ffffff; /* Màu nền của container */
   border-radius: 10px; /* Bo tròn viền của container */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
-  
 }
-
 
 .container h2 {
   font-size: 24px; /* Cỡ chữ của tiêu đề */

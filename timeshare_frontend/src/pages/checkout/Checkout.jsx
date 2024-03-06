@@ -54,18 +54,16 @@ const PaymentPage = () => {
           return `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}-${String(dateObj.getDate()).padStart(2, '0')}`;
         };
 
-        const startDateString = typeof date[0].startDate === 'string' ? date[0].startDate : formatDateString(date[0].startDate);
-        const endDateString = typeof date[0].endDate === 'string' ? date[0].endDate : formatDateString(date[0].endDate);
+        const startDateString = "03-06";
+        const endDateString = "03-13";
 
-        const startDay = `${startDateString[1]}-${startDateString[2]}`;
-        const endDay = `${endDateString[1]}-${endDateString[2]}`;
-        const startYear = startDateString[0];
+        // const startDay = `${startDateString[1]}-${startDateString[2]}`;
+        // const endDay = `${endDateString[1]}-${endDateString[2]}`;
+        const startYear = "2024";
         const numYears = 20; // default timeshare contract duration
-        const apiUrl = `https://swp-timeshare-back.vercel.app/api/property/reserve?timeshareId=${timeshareId}&customerId=${uid}&startDay=${startDay}&endDay=${endDay}&startYear=${startYear}&numYears=${numYears}`;
+        const apiUrl = `https://swp-timeshare-back.vercel.app/api/property/reserve?timeshareId=${timeshareId}&customerId=${uid}&startDay=03-06&endDay=03-13&startYear=${startYear}&numYears=${numYears}`;
 
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-        });
+        const response = await fetch(apiUrl, {method: 'POST'});
 
         setPaymentStatus('Payment successful! Your booking has been recorded.');
       } catch (error) {

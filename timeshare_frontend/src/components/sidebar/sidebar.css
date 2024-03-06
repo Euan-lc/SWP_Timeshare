@@ -3,7 +3,7 @@
     padding:0;
     text-decoration: none;
 } */
-.container{
+.container_sidebar{
     display:flex;
     float: left;
     width: 300px;
