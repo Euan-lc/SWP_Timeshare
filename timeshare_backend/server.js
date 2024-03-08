@@ -3,6 +3,7 @@ require('dotenv').config()
 
 const propertyRouter =require('./routes/r_properties');
 const reviewRouter = require('./routes/r_reviews');
+const customerRouter = require('./routes/r_customer');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 
 app.use('/api/property', propertyRouter);
 app.use('/api/review', reviewRouter);
+app.use('/api/customer', customerRouter);
 
 app.listen(process.env.PORT, () => console.log(`Server is listening on port ${process.env.PORT}.`));
 
