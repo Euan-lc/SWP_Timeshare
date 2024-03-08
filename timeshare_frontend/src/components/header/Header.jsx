@@ -13,8 +13,9 @@ import { DateRange } from "react-date-range";
 import { useState } from "react";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 
 export default function Header({type}) {
@@ -50,6 +51,39 @@ export default function Header({type}) {
     const handleSearch = () => {
         navigate("/list", { state: { destination, date, options } });
     }
+
+    const dateRef = useRef(null);
+    const clickRef = useRef(null);
+
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+
+            const isDateRangeClick =
+                event.target.closest('.rdrCalendarWrapper.rdrDateRangeWrapper.date');
+
+            if (dateRef.current && !dateRef.current.contains(event.target) && !isDateRangeClick && openDate) {
+                setOpenDate(false);
+            }
+
+            if (clickRef.current && !clickRef.current.contains(event.target) && openOptions && !event.target.closest('.options')) {
+                setOpenOptions(false);
+            }
+            
+        }
+    
+
+
+        document.addEventListener('click', handleOutsideClick);
+
+        return () => {
+        document.removeEventListener('click', handleOutsideClick);
+        };
+    }, [openDate, openOptions]);
+
+    const handleSearchClick = () => {
+        setOpenDate(!openDate);
+      };
+    
 
     return (
         <div className="header">
@@ -88,7 +122,7 @@ export default function Header({type}) {
                     </div>
                     <div className="headerSearchItem">
                         <Icon><CalendarMonthRoundedIcon className="searchIcon"/></Icon>
-                        <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "yyyy-MM-dd")} to ${format(date[0].endDate, "yyyy-MM-dd")}`}</span>
+                        <span onClick={() => setOpenDate(!openDate)} className="headerSearchText" ref={dateRef}>{`${format(date[0].startDate, "yyyy-MM-dd")} to ${format(date[0].endDate, "yyyy-MM-dd")}`}</span>
                         {openDate && <DateRange
                             editableDateInputs={true}
                             onChange={(item) => setDate([item.selection])}
@@ -100,7 +134,7 @@ export default function Header({type}) {
                     </div>
                     <div className="headerSearchItem">
                         <Icon><GroupsIcon className="searchIcon"/></Icon>
-                        <span onClick={() => setOpenOptions(!openOptions)}className="headerSearchText">{`${options.adult} adult • ${options.children} children • ${options.room} room`}</span>
+                        <span onClick={() => setOpenOptions(!openOptions)}className="headerSearchText" ref={clickRef}>{`${options.adult} adult • ${options.children} children • ${options.room} room`}</span>
                             {openOptions && <div className="options">
                                 <div className="optionItem">
                                     <span className="optionText">Adult</span>
