@@ -53,21 +53,37 @@ export default function Header({type}) {
     }
 
     const dateRef = useRef(null);
+    const clickRef = useRef(null);
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
 
-        if (dateRef.current && !dateRef.current.contains(event.target) && openDate) {
-            setOpenDate(false);
+            const isDateRangeClick =
+                event.target.closest('.rdrCalendarWrapper.rdrDateRangeWrapper.date');
+
+            if (dateRef.current && !dateRef.current.contains(event.target) && !isDateRangeClick && openDate) {
+                setOpenDate(false);
+            }
+
+            if (clickRef.current && !clickRef.current.contains(event.target) && openOptions && !event.target.closest('.options')) {
+                setOpenOptions(false);
+            }
+            
         }
-        };
+    
+
 
         document.addEventListener('click', handleOutsideClick);
 
         return () => {
         document.removeEventListener('click', handleOutsideClick);
         };
-    }, [openDate]);
+    }, [openDate, openOptions]);
+
+    const handleSearchClick = () => {
+        setOpenDate(!openDate);
+      };
+    
 
     return (
         <div className="header">
@@ -118,7 +134,7 @@ export default function Header({type}) {
                     </div>
                     <div className="headerSearchItem">
                         <Icon><GroupsIcon className="searchIcon"/></Icon>
-                        <span onClick={() => setOpenOptions(!openOptions)}className="headerSearchText">{`${options.adult} adult • ${options.children} children • ${options.room} room`}</span>
+                        <span onClick={() => setOpenOptions(!openOptions)}className="headerSearchText" ref={clickRef}>{`${options.adult} adult • ${options.children} children • ${options.room} room`}</span>
                             {openOptions && <div className="options">
                                 <div className="optionItem">
                                     <span className="optionText">Adult</span>
