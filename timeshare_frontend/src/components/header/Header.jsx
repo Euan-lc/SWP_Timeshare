@@ -13,8 +13,9 @@ import { DateRange } from "react-date-range";
 import { useState } from "react";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 
 export default function Header({type}) {
@@ -50,6 +51,23 @@ export default function Header({type}) {
     const handleSearch = () => {
         navigate("/list", { state: { destination, date, options } });
     }
+
+    const dateRef = useRef(null);
+
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+
+        if (dateRef.current && !dateRef.current.contains(event.target) && openDate) {
+            setOpenDate(false);
+        }
+        };
+
+        document.addEventListener('click', handleOutsideClick);
+
+        return () => {
+        document.removeEventListener('click', handleOutsideClick);
+        };
+    }, [openDate]);
 
     return (
         <div className="header">
@@ -88,7 +106,7 @@ export default function Header({type}) {
                     </div>
                     <div className="headerSearchItem">
                         <Icon><CalendarMonthRoundedIcon className="searchIcon"/></Icon>
-                        <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "yyyy-MM-dd")} to ${format(date[0].endDate, "yyyy-MM-dd")}`}</span>
+                        <span onClick={() => setOpenDate(!openDate)} className="headerSearchText" ref={dateRef}>{`${format(date[0].startDate, "yyyy-MM-dd")} to ${format(date[0].endDate, "yyyy-MM-dd")}`}</span>
                         {openDate && <DateRange
                             editableDateInputs={true}
                             onChange={(item) => setDate([item.selection])}
