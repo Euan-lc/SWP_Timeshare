@@ -23,7 +23,7 @@ export default function List() {
         min: location.state.price?.min || '',
         max: location.state.price?.max || '',
     });
-    const [hasMoreProps, setHasMoreProps] = useState(true);
+    const [offset, setOffset] = useState(0);
 
     const [properties, setProperties] = useState([]);
 
@@ -46,29 +46,30 @@ export default function List() {
         }));
       };
 
-    const fetchProperties = async (page) => {
-        try {
-            let offset = page * 10;
-            var response = null;
-            const baseUrl = `https://swp-timeshare-back.vercel.app/api/property/all?limit=10&offset=${offset}&sort_by=asc:price&start:${date[0].startDate}&end:${date[0].endDate}&location=${destination}`;
-            const baseUrlWithBothPrice = `https://swp-timeshare-back.vercel.app/api/property/all?limit=10&offset=${offset}&sort_by=asc:price&start:${date[0].startDate}&end:${date[0].endDate}&location=${destination}&price=lt:${price.max}&price=gt:${price.min}`;
-            // const queryParams = ``;
-            if (price.min === '' && price.max === '') {
-                response = await fetch(`${baseUrl}`);
-            } else {
-                response = await fetch(`${baseUrlWithBothPrice}`);
+    useEffect(() => {
+        const fetchProperties = async () => {
+            try {
+                var response = null;
+                const baseUrl = `https://swp-timeshare-back.vercel.app/api/property/all?limit=10&offset=${offset}&sort_by=asc:price&start:${date[0].startDate}&end:${date[0].endDate}&location=${destination}`;
+                const baseUrlWithBothPrice = `https://swp-timeshare-back.vercel.app/api/property/all?limit=10&offset=${offset}&sort_by=asc:price&start:${date[0].startDate}&end:${date[0].endDate}&location=${destination}&price=lt:${price.max}&price=gt:${price.min}`;
+                // const queryParams = ``;
+                if (price.min === '' && price.max === '') {
+                    response = await fetch(`${baseUrl}`);
+                } else {
+                    response = await fetch(`${baseUrlWithBothPrice}`);
+                }
+                if (!response.ok) {
+                    throw new Error('Failed to fetch properties');
+                }
+                const data = await response.json();
+                setProperties(data);
+            } catch (error) {
+                console.error('Error fetching properties:', error);
             }
-            if (!response.ok) {
-                throw new Error('Failed to fetch properties');
-            }
-            const data = await response.json();
-            if(data.length){setProperties([...properties, ...data]);}
-            else{setHasMoreProps(false)}
-
-        } catch (error) {
-            console.error('Error fetching properties:', error);
-        }
-    };
+        };
+    
+        fetchProperties();
+    }, [offset]);
 
     return (
         <div>
@@ -133,16 +134,24 @@ export default function List() {
                             </div>
                         <button onClick={() => handleSearch()}>Search</button>
                     </div>
-                    <InfiniteScroll
-                        pageStart={-1}
-                        loadMore={fetchProperties}
-                        hasMore={hasMoreProps}
-                        loader={<div className="loader" key={0}>Loading ...</div>}
-                    >
-                        {properties.map((property) => (
-                                    <SearchItem timeshareId={property.timeshareId} info={property} date={date} />
-                                ))}
-                    </InfiniteScroll>
+                    <div className="listResult">
+
+                        {properties.length > 0 ? (
+                            properties.map((property) => (
+                            <SearchItem timeshareId={property.timeshareId} info={property} date={date} />
+                        ))
+                        ) : (
+                            <p className="errorMessage">No properties found or available.</p>
+                         )}
+                        {/*<div>*/}
+                        {/*    <IconButton onClick={()=>{setOffset(offset - 10)}}>*/}
+                        {/*        <ArrowBackIosIcon/>*/}
+                        {/*    </IconButton>*/}
+                        {/*    <IconButton onClick={()=>{setOffset(offset + 10); console.log(offset)}}>*/}
+                        {/*        <ArrowForwardIosIcon/>*/}
+                        {/*    </IconButton>*/}
+                        {/*</div>*/}
+                    </div>
 
                 </div>
             </div>
