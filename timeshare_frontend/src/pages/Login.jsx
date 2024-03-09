@@ -57,6 +57,9 @@ export default function SignInSide() {
         e.preventDefault();
         setError("");
         signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
+        .then((userCredential) => {
+            navigate("/");
+        })
         .catch((error) => {
             setError(error.message);
         });
@@ -74,7 +77,12 @@ export default function SignInSide() {
         signInWithPopup(auth, provider).then((data) => {
             setValue(data.user.email)
             localStorage.setItem("email", data.user.email)
+            navigate("/");
         })
+        .catch((error) => {
+            console.error("Error during Google sign-in: ", error);
+            setError(error.message);
+        });
     }
 
     React.useEffect(() => {
@@ -157,8 +165,8 @@ export default function SignInSide() {
                             </div>
                             }
                             <div>
-                                {value ? navigate("/") :
-                                <button onClick={handleClick}>Sign In with Google</button>}
+                                {/* {value ? navigate("/") : */}
+                                <button onClick={handleClick}>Sign In with Google</button>
                             </div>
                             <Grid container>
                                 <Grid item xs>
