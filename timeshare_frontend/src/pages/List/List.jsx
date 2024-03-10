@@ -7,6 +7,8 @@ import { format } from "date-fns";
 import { useLocation } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import { useNavigate } from "react-router-dom";
+import Slider from 'react-slider';
+
 
 export default function List() {
     const navigate = useNavigate();
@@ -16,8 +18,8 @@ export default function List() {
     const [openDate, setOpenDate] = useState(false);
     const [options, setOptions] = useState(location.state.options);
     const [price, setPrice] = useState({
-        min: location.state.price?.min || '',
-        max: location.state.price?.max || '',
+        min: location.state.price?.min || 0,
+        max: location.state.price?.max || 1000,
     });
 
     const [properties, setProperties] = useState([]);
@@ -66,6 +68,7 @@ export default function List() {
         fetchProperties();
     }, []);
 
+
     return (
         <div>
             <Navbar/>
@@ -94,15 +97,29 @@ export default function List() {
                                     <span className="lsOptionText">
                                         Min price <small>per night</small>
                                     </span>
-                                    <input type="number" min={0} className="lsOptionInput" placeholder={price.min}
+                                    <input type="number" min={0} max={1000} className="lsOptionInput" 
+                                    value={price.min === '' ? '' : parseInt(price.min)}
                                     onChange={(e) => handlePriceChange('min', parseInt(e.target.value))}/>
                                 </div>
                                 <div className="lsOptionItem">
                                     <span className="lsOptionText">
                                         Max price <small>per night</small>
                                     </span>
-                                    <input type="number" min={0} className="lsOptionInput" placeholder={price.max}
+                                    <input type="number" min={0} max={1000} className="lsOptionInput" 
+                                    value={price.max === '' ? '' : parseInt(price.max)}
                                     onChange={(e) => handlePriceChange('max', parseInt(e.target.value))}/>
+                                </div>
+                                <div className="lsOptionItem">
+                                    <Slider
+                                        className="slider"
+                                        min={0}
+                                        max={1000}
+                                        value={[parseInt(price.min), parseInt(price.max)]}
+                                        onChange={(value) => {
+                                            handlePriceChange('min', value[0]);
+                                            handlePriceChange('max', value[1]);
+                                        }}
+                                    />
                                 </div>
                                 <div className="lsOptionItem">
                                     <span className="lsOptionText">
