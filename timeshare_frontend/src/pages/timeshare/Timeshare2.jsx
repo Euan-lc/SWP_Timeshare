@@ -135,8 +135,8 @@ export default function Timeshare() {
             </div>
           </div>
         </div>
-        <Footer/>
       </div>
+      <Footer/>
     </div>
   );
 };

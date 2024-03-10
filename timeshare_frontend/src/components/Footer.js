@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Box, Grid, Link, Typography, Container, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import XIcon from '@mui/icons-material/X';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 // Replace these with your own social media URLs
 const socialMediaLinks = {
     facebook: '#',
-    twitter: '#',
+    x: '#',
     instagram: '#',
 };
 
@@ -62,8 +62,8 @@ const Footer = () => {
                         <IconButton aria-label="Facebook" color="inherit" component="a" href={socialMediaLinks.facebook}>
                             <FacebookIcon />
                         </IconButton>
-                        <IconButton aria-label="Twitter" color="inherit" component="a" href={socialMediaLinks.twitter}>
-                            <TwitterIcon />
+                        <IconButton aria-label="X" color="inherit" component="a" href={socialMediaLinks.x}>
+                            <XIcon />
                         </IconButton>
                         <IconButton aria-label="Instagram" color="inherit" component="a" href={socialMediaLinks.instagram}>
                             <InstagramIcon />
