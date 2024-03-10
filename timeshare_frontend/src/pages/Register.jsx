@@ -153,13 +153,19 @@ export default function Register() {
                             </div>
                         }
                         
-                        <Grid container justifyContent="flex-end">
+                        <Grid container justify="flex-end" direction="column" alignItems="flex-end">
                             <Grid item>
                                 <Link onClick={() => navigate("/login")} href="#" variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>
+                            <Grid item>
+                                <Link onClick={() => navigate("/")} href="#" variant="body2">
+                                    {"Go back to homepage"}
+                                </Link>
+                            </Grid>
                         </Grid>
+
                     </Box>
                 </Box>
             </Grid>

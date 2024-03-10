@@ -172,6 +172,11 @@ export default function SignInSide() {
                                     </Link>
                                 </Grid>
                             </Grid>
+                            <Grid item>
+                                    <Link onClick={() => navigate("/")} href="#" variant="body2">
+                                        {"Go back to homepage"}
+                                    </Link>
+                            </Grid>
                         </Box>
                     </Box>
                 </Grid>
