@@ -11,13 +11,16 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 export default function Register() {
     const navigate = useNavigate();
+    const db = getFirestore();
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -31,22 +34,43 @@ export default function Register() {
     const [userCredentials, setUserCredentials] = React.useState({});
     const [error, setError] = React.useState("");
 
-    function handleCredentials(e)
-    {
-        setUserCredentials({...userCredentials, [e.target.name]: e.target.value});
+
+    function handleCredentials(e) {
+        setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
     }
 
-    // Send UID to backend
-
-    function handleSignUp(e)
-    {
-        setError("");
+    function handleSignUp(e) {
         e.preventDefault();
+        setError("");
+
         createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
-        .catch((error) => {
-            setError(error.message);
-        });
-        navigate("/");
+            .then(async (userCredential) => {
+                const uid = userCredential.user.uid;
+                const apiUrl = `https://swp-timeshare-back.vercel.app/api/customer=${uid}`;
+
+                fetch(apiUrl, { method: 'POST' })
+                    .then(data => {
+                        console.log('Success:', data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        setError("Failed to register the user in the database.");
+                    });
+
+                // Check against the whitelist in Firestore
+                const docRef = doc(db, "adminWhitelist", userCredentials.email);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    navigate("/admin");
+                } else {
+                    navigate("/");
+                }
+            })
+            .catch((error) => {
+                // Handle errors from Firebase Authentication
+                setError(error.message);
+            });
+
     }
 
     console.log(auth);
@@ -78,15 +102,16 @@ export default function Register() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-                        <LockOutlinedIcon/>
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                        <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
+                            {/* <Grid item xs={12} sm={6}>
+
                                 <TextField
                                     autoComplete="given-name"
                                     name="firstName"
@@ -106,10 +131,10 @@ export default function Register() {
                                     name="lastName"
                                     autoComplete="family-name"
                                 />
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={12}>
                                 <TextField
-                                    onChange={(e) => {handleCredentials(e)}}
+                                    onChange={(e) => { handleCredentials(e) }}
                                     required
                                     fullWidth
                                     id="email"
@@ -120,7 +145,7 @@ export default function Register() {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
-                                    onChange={(e) => {handleCredentials(e)}}
+                                    onChange={(e) => { handleCredentials(e) }}
                                     required
                                     fullWidth
                                     name="password"
@@ -132,17 +157,18 @@ export default function Register() {
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary"/>}
+
+                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
                                     label="I want to receive inspiration, marketing promotions and updates via email."
                                 />
                             </Grid>
                         </Grid>
                         <Button
-                            onClick={(e) => {handleSignUp(e)}}
+                            onClick={(e) => { handleSignUp(e) }}
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{mt: 3, mb: 2}}
+                            sx={{ mt: 3, mb: 2 }}
                         >
                             Sign Up
                         </Button>
@@ -152,8 +178,9 @@ export default function Register() {
                                 {error}
                             </div>
                         }
-                        
-                        <Grid container justify="flex-end" direction="column" alignItems="flex-end">
+
+                        <Grid container justifyContent="flex-end">
+
                             <Grid item>
                                 <Link onClick={() => navigate("/login")} href="#" variant="body2">
                                     Already have an account? Sign in
@@ -165,7 +192,6 @@ export default function Register() {
                                 </Link>
                             </Grid>
                         </Grid>
-
                     </Box>
                 </Box>
             </Grid>

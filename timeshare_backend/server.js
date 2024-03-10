@@ -1,7 +1,9 @@
 const express = require('express');
 require('dotenv').config()
 
-const propertyRouter = require('./routes/r_properties');
+
+const propertyRouter =require('./routes/r_properties');
+
 const reviewRouter = require('./routes/r_reviews');
 
 const app = express();
@@ -22,9 +24,5 @@ app.use('/api/property', propertyRouter);
 app.use('/api/review', reviewRouter);
 
 app.listen(process.env.PORT, () => console.log(`Server is listening on port ${process.env.PORT}.`));
-
-app.get('/', (req, res) => {
-    res.send('Welcome to the API!');
-});
 
 module.exports = app;

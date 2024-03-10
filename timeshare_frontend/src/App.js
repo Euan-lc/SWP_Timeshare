@@ -3,7 +3,8 @@ import {ThemeProvider, createTheme} from '@mui/material/styles';
 // import Layout from "./pages/Layout";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./pages/Home/Home";
-import List from "./pages/List/List.jsx";
+
+import List from "./pages/List/List";
 import Timeshare from "./pages/timeshare/Timeshare2.jsx";
 import Checkout from "./pages/checkout/Checkout";
 import Login from "./pages/Login";
