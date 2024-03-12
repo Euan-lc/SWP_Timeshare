@@ -14,6 +14,7 @@ import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { selectUsers } from "./store/usersSlice.js";
+import { FaRegLifeRing } from "react-icons/fa";
 
 const clientId = "122285275633-uldisg6noor0qau5shbh6hmc5j6mmtai.apps.googleusercontent.com"
 

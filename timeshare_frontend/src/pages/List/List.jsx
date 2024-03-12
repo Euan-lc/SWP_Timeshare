@@ -26,6 +26,7 @@ export default function List() {
     });
 
     const [properties, setProperties] = useState([]);
+    const [hasMoreProps, setHasMoreProps] = useState(true);
 
     const handleSearch = () => {
         navigate("/list", { state: { destination, date, options, price } });
@@ -70,6 +71,24 @@ export default function List() {
         }
     };
 
+    const handleDateChange = (ranges) => {
+        const currentRange = ranges.selection;
+        if (ranges.selection.endDate == ranges.selection.startDate){
+            const newEndDate = new Date(currentRange.endDate);
+            newEndDate.setDate(newEndDate.getDate() + 1);
+            const updatedRange = {
+                startDate: currentRange.startDate,
+                endDate: newEndDate,
+                key: "selection",
+                };
+    
+            setDate([updatedRange]);
+        }
+        else {
+            setDate([ranges.selection]);
+        }
+    };
+
 
     return (
         <div>
@@ -87,9 +106,11 @@ export default function List() {
                                 <label>Check-in</label>
                                 <span onClick={() => setOpenDate(!openDate)}>{`${format(date[0].startDate, "yyyy-MM-dd")} to ${format(date[0].endDate, "yyyy-MM-dd")}`}</span>
                                     {openDate && <DateRange
-                                    onChange={item=>setDate([item.selection])}
-                                    minDate={new Date()}
+                                    editableDateInputs={true}
+                                    onChange={handleDateChange}
+                                    moveRangeOnFirstSelection={false}
                                     ranges={date}
+                                    minDate={new Date()}
                                     />}
                             </div>
                             <div className="lsItem">
