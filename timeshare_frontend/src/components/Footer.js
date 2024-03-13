@@ -34,7 +34,7 @@ const Footer = () => {
                         <Typography variant="subtitle1" color="text.primary" gutterBottom>
                             ABOUT
                         </Typography>
-                        <Link href="#" color="inherit" display="block">About us</Link>
+                        <Link href="/about-us" color="inherit" display="block">About us</Link>
                         <Link href="#" color="inherit" display="block">Features</Link>
                         <Link href="#" color="inherit" display="block">Works</Link>
                         <Link href="#" color="inherit" display="block">Career</Link>

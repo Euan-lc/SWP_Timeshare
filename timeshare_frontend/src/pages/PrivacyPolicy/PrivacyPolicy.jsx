@@ -153,7 +153,7 @@ export default function PrivacyPolicy() {
                     <h2 id="section-contact">Contact Us</h2>
                     <p>
                         If you have any questions or concerns regarding this Privacy Policy,
-                        please contact us at [your contact email].
+                        please contact us at <b>contact@timeshare.com</b>.
                     </p>
 
                     <p>Thank you for choosing Company Co.</p>
