@@ -17,3 +17,12 @@ h2 {
 .table-of-contents {
     margin-right: 100px;
 }
+
+.table-of-contents:hover {
+    cursor: pointer;
+}
+
+.limit-height {
+    max-height: 500px; /* Ajustez la valeur selon vos besoins */
+    overflow-y: auto; /* Ajoutez une barre de défilement si nécessaire */
+}

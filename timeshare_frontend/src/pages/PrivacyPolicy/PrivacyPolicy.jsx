@@ -34,17 +34,17 @@ export default function PrivacyPolicy() {
             <Header type="list"/>
             
             <div className="privacy-policy-container">
-                <div className="table-of-contents">
+                <div className={`table-of-contents ${activeSection === 'section-contact' ? 'limit-height' : ''}`}>
                     <h3>Table of Contents</h3>
-                            {sections.map((section) => (
-                                <p
-                                    key={section.id}
-                                    className={activeSection === section.id ? 'active' : ''}
-                                    onClick={() => handleSectionClick(section.id)}
-                                >
-                                    {section.title}
-                                </p>
-                            ))}
+                    {sections.map((section, index) => (
+                        <p
+                            key={section.id}
+                            className={activeSection === section.id ? 'active' : ''}
+                            onClick={() => handleSectionClick(section.id)}
+                        >
+                            {section.title}
+                        </p>
+                    ))}
                 </div>
                 <div className="privacy-policy-content">
                     <h1>Privacy Policy</h1>
