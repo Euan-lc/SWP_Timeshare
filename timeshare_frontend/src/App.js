@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CustomerAccount from "./pages/customerAccount/CustomerAccount";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy.jsx";
+import TermsAndConditions from "./pages/TermsAndConditions/TermsAndCondition";
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
 import { useSelector } from "react-redux";
@@ -57,6 +58,7 @@ function App() {
                     <Route path="/list/timeshare" element={<Timeshare/>}/>
                     <Route path="/list/timeshare/checkout" element={<Checkout/>}/>
                     <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+                    <Route path="/terms-and-conditions" element={<TermsAndConditions/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

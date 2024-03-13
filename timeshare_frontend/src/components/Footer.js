@@ -44,7 +44,7 @@ const Footer = () => {
                             HELP
                         </Typography>
                         <Link href="#" color="inherit" display="block">Customer support</Link>
-                        <Link href="#" color="inherit" display="block">Terms and conditions</Link>
+                        <Link href="/terms-and-conditions" color="inherit" display="block">Terms and conditions</Link>
                         <Link href="/privacy-policy" color="inherit" display="block">Privacy Policy</Link>
                     </Grid>
                     <Grid item xs={6} sm={3} md={2}>
