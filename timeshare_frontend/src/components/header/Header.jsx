@@ -16,6 +16,7 @@ import 'react-date-range/dist/theme/default.css';
 import { format, set } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { it } from "date-fns/locale";
 
 
 export default function Header({type}) {
@@ -83,6 +84,24 @@ export default function Header({type}) {
     const handleSearchClick = () => {
         setOpenDate(!openDate);
       };
+
+    const handleDateChange = (ranges) => {
+        const currentRange = ranges.selection;
+        if (ranges.selection.endDate == ranges.selection.startDate){
+            const newEndDate = new Date(currentRange.endDate);
+            newEndDate.setDate(newEndDate.getDate() + 1);
+            const updatedRange = {
+                startDate: currentRange.startDate,
+                endDate: newEndDate,
+                key: "selection",
+                };
+    
+            setDate([updatedRange]);
+        }
+        else {
+            setDate([ranges.selection]);
+        }
+    };
     
 
     return (
@@ -125,7 +144,7 @@ export default function Header({type}) {
                         <span onClick={() => setOpenDate(!openDate)} className="headerSearchText" ref={dateRef}>{`${format(date[0].startDate, "yyyy-MM-dd")} to ${format(date[0].endDate, "yyyy-MM-dd")}`}</span>
                         {openDate && <DateRange
                             editableDateInputs={true}
-                            onChange={(item) => setDate([item.selection])}
+                            onChange={handleDateChange}
                             moveRangeOnFirstSelection={false}
                             ranges={date}
                             minDate={new Date()}

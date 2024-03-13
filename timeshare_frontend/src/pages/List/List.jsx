@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { useLocation } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import { useNavigate } from "react-router-dom";
+import Slider from 'react-slider';
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -20,12 +21,12 @@ export default function List() {
     const [openDate, setOpenDate] = useState(false);
     const [options, setOptions] = useState(location.state.options);
     const [price, setPrice] = useState({
-        min: location.state.price?.min || '',
-        max: location.state.price?.max || '',
+        min: location.state.price?.min || 0,
+        max: location.state.price?.max || 1000,
     });
-    const [hasMoreProps, setHasMoreProps] = useState(true);
 
     const [properties, setProperties] = useState([]);
+    const [hasMoreProps, setHasMoreProps] = useState(true);
 
     const handleSearch = () => {
         navigate("/list", { state: { destination, date, options, price } });
@@ -70,6 +71,25 @@ export default function List() {
         }
     };
 
+    const handleDateChange = (ranges) => {
+        const currentRange = ranges.selection;
+        if (ranges.selection.endDate == ranges.selection.startDate){
+            const newEndDate = new Date(currentRange.endDate);
+            newEndDate.setDate(newEndDate.getDate() + 1);
+            const updatedRange = {
+                startDate: currentRange.startDate,
+                endDate: newEndDate,
+                key: "selection",
+                };
+    
+            setDate([updatedRange]);
+        }
+        else {
+            setDate([ranges.selection]);
+        }
+    };
+
+
     return (
         <div>
             <Navbar/>
@@ -86,9 +106,11 @@ export default function List() {
                                 <label>Check-in</label>
                                 <span onClick={() => setOpenDate(!openDate)}>{`${format(date[0].startDate, "yyyy-MM-dd")} to ${format(date[0].endDate, "yyyy-MM-dd")}`}</span>
                                     {openDate && <DateRange
-                                    onChange={item=>setDate([item.selection])}
-                                    minDate={new Date()}
+                                    editableDateInputs={true}
+                                    onChange={handleDateChange}
+                                    moveRangeOnFirstSelection={false}
                                     ranges={date}
+                                    minDate={new Date()}
                                     />}
                             </div>
                             <div className="lsItem">
@@ -98,15 +120,29 @@ export default function List() {
                                     <span className="lsOptionText">
                                         Min price <small>per night</small>
                                     </span>
-                                    <input type="number" min={0} className="lsOptionInput" placeholder={price.min}
+                                    <input type="number" min={0} max={1000} className="lsOptionInput" 
+                                    value={price.min === '' ? '' : parseInt(price.min)}
                                     onChange={(e) => handlePriceChange('min', parseInt(e.target.value))}/>
                                 </div>
                                 <div className="lsOptionItem">
                                     <span className="lsOptionText">
                                         Max price <small>per night</small>
                                     </span>
-                                    <input type="number" min={0} className="lsOptionInput" placeholder={price.max}
+                                    <input type="number" min={0} max={1000} className="lsOptionInput" 
+                                    value={price.max === '' ? '' : parseInt(price.max)}
                                     onChange={(e) => handlePriceChange('max', parseInt(e.target.value))}/>
+                                </div>
+                                <div className="lsOptionItem">
+                                    <Slider
+                                        className="slider"
+                                        min={0}
+                                        max={1000}
+                                        value={[parseInt(price.min), parseInt(price.max)]}
+                                        onChange={(value) => {
+                                            handlePriceChange('min', value[0]);
+                                            handlePriceChange('max', value[1]);
+                                        }}
+                                    />
                                 </div>
                                 <div className="lsOptionItem">
                                     <span className="lsOptionText">
@@ -143,7 +179,6 @@ export default function List() {
                                     <SearchItem timeshareId={property.timeshareId} info={property} date={date} />
                                 ))}
                     </InfiniteScroll>
-
                 </div>
             </div>
         </div>

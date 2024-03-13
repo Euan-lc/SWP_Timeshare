@@ -1,3 +1,4 @@
+
 const {pool} = require('../database')
 
 exports.ReserveProperty = async (req, res) => {
@@ -17,10 +18,12 @@ exports.ReserveProperty = async (req, res) => {
     })
 }
 
+
 exports.GetAllProperties = async (req, res) => {
     var limit = parseInt(req.query.limit) ? req.query.limit : 10;
     var offset = parseInt(req.query.offset) ? req.query.offset : 0;
     var sort = req.query.sort_by ? req.query.sort_by.split(':') : ['desc', 'rating'];
+
     let end = req.query.availability ? req.query.availability[1].split(':')[1] :  '9999-12-31' ;
     let start = req.query.availability ? req.query.availability[0].split(':')[1] : '9999-12-31';
 
@@ -44,6 +47,7 @@ exports.GetAllProperties = async (req, res) => {
     console.log(query)
     pool.query(query, (err, result) => {
         if (err) {
+
             console.error(err);
             return;
         }
@@ -56,10 +60,12 @@ exports.GetSingleProperty = async (req, res) => {
 
     pool.query(`Select * from Properties left join Gallery on Properties.timeshareId = Gallery.timeshareId where Properties.timeshareId = ${req.query.id}`, (err, result) => {
         if (err) {
+
             console.error(err);
             return;
         }
         // rows fetch
+
         console.log(result)
         let property = result[0]
         property.images = [];
@@ -68,12 +74,14 @@ exports.GetSingleProperty = async (req, res) => {
         }
         delete property.image;
         res.send(property);
+
     });
 }
 
 exports.GetLocations = async (req, res) => {
     pool.query('SELECT * FROM Properties GROUP BY address', (err, result) => {
         if (err) {
+
             console.error(err);
             return;
         }
@@ -86,7 +94,9 @@ exports.AddNewProperty = async (req, res) => {
     pool.query(`INSERT INTO Properties (name, address, price, capacity, size, description, img) 
                                 VALUES ("${req.query.name}", "${req.query.address}", ${req.query.price}, ${req.query.capacity}, ${req.query.size}, "${req.query.description}", "${req.query.img}")`,
         (err, result) => {
+
             if (err) {
+
                 console.error(err);
                 return;
             }

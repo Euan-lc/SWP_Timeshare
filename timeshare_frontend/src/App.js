@@ -3,16 +3,21 @@ import {ThemeProvider, createTheme} from '@mui/material/styles';
 // import Layout from "./pages/Layout";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./pages/Home/Home";
+
 import List from "./pages/List/List";
 import Timeshare from "./pages/timeshare/Timeshare2.jsx";
 import Checkout from "./pages/checkout/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CustomerAccount from "./pages/customerAccount/CustomerAccount";
+import PrivacyPolicy from './pages/privacyPolicy/PrivacyPolicy.jsx';
+import TermsAndConditions from "./pages/termsAndConditions/TermsAndCondition.jsx";
+import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { selectUsers } from "./store/usersSlice.js";
+import { FaRegLifeRing } from "react-icons/fa";
 
 const clientId = "122285275633-uldisg6noor0qau5shbh6hmc5j6mmtai.apps.googleusercontent.com"
 
@@ -53,6 +58,9 @@ function App() {
                     <Route path="/list" element={<List/>}/>
                     <Route path="/list/timeshare" element={<Timeshare/>}/>
                     <Route path="/list/timeshare/checkout" element={<Checkout/>}/>
+                    <Route path="/terms-and-conditions" element={<TermsAndConditions/>}/>
+                    <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+                    <Route path="/about-us" element={<AboutUs/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

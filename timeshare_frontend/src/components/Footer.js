@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { Box, Grid, Link, Typography, Container, IconButton } from '@mui/material';
+import { Box, Grid, Typography, Container, IconButton, Link } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import XIcon from '@mui/icons-material/X';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 // Replace these with your own social media URLs
 const socialMediaLinks = {
     facebook: '#',
-    twitter: '#',
+    x: '#',
     instagram: '#',
 };
 
@@ -34,7 +34,7 @@ const Footer = () => {
                         <Typography variant="subtitle1" color="text.primary" gutterBottom>
                             ABOUT
                         </Typography>
-                        <Link href="#" color="inherit" display="block">About us</Link>
+                        <Link href="/about-us" color="inherit" display="block">About us</Link>
                         <Link href="#" color="inherit" display="block">Features</Link>
                         <Link href="#" color="inherit" display="block">Works</Link>
                         <Link href="#" color="inherit" display="block">Career</Link>
@@ -44,8 +44,8 @@ const Footer = () => {
                             HELP
                         </Typography>
                         <Link href="#" color="inherit" display="block">Customer support</Link>
-                        <Link href="#" color="inherit" display="block">Terms and conditions</Link>
-                        <Link href="#" color="inherit" display="block">Privacy Policy</Link>
+                        <Link href="/terms-and-conditions" color="inherit" display="block">Terms and conditions</Link>
+                        <Link href="/privacy-policy" color="inherit" display="block">Privacy Policy</Link>
                     </Grid>
                     <Grid item xs={6} sm={3} md={2}>
                         <Typography variant="subtitle1" color="text.primary" gutterBottom>
@@ -62,8 +62,8 @@ const Footer = () => {
                         <IconButton aria-label="Facebook" color="inherit" component="a" href={socialMediaLinks.facebook}>
                             <FacebookIcon />
                         </IconButton>
-                        <IconButton aria-label="Twitter" color="inherit" component="a" href={socialMediaLinks.twitter}>
-                            <TwitterIcon />
+                        <IconButton aria-label="X" color="inherit" component="a" href={socialMediaLinks.x}>
+                            <XIcon />
                         </IconButton>
                         <IconButton aria-label="Instagram" color="inherit" component="a" href={socialMediaLinks.instagram}>
                             <InstagramIcon />
@@ -76,6 +76,6 @@ const Footer = () => {
             </Container>
         </Box>
     );
-};
+}
 
 export default Footer;

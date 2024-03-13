@@ -1,7 +1,9 @@
 const express = require('express');
 require('dotenv').config()
 
+
 const propertyRouter =require('./routes/r_properties');
+
 const reviewRouter = require('./routes/r_reviews');
 
 const app = express();

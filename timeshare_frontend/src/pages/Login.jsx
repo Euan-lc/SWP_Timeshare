@@ -37,6 +37,7 @@ export default function SignInSide() {
         });
     };
 
+
     const checkAdminAndRedirect = async (email) => {
         const docRef = doc(db, "adminWhitelist", email);
         const docSnap = await getDoc(docRef);
@@ -76,6 +77,7 @@ export default function SignInSide() {
     }
 
     function handlePasswordReset() {
+
         const email = prompt("Please enter you email");
         sendPasswordResetEmail(auth, email);
         alert("Email sent ! Check your inbox for password reset instructions.");
@@ -98,11 +100,13 @@ export default function SignInSide() {
             });
     };
 
+
     React.useEffect(() => {
         setValue(localStorage.getItem('email'))
     }, [])
 
     return (
+
         <Grid container component="main" sx={{ height: '100vh' }}>
             <CssBaseline />
             <Grid
@@ -172,29 +176,38 @@ export default function SignInSide() {
                             Sign In
                         </Button>
                         {
+
                             error &&
                             <div className="error">
                                 {error}
                             </div>
-                        }
-                        <div>
-                            <button onClick={handleClick}>Sign In with Google</button>
-                        </div>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link onClick={handlePasswordReset} href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
+
+                            }
+                            <div>
+                                {value ? navigate("/") :
+                                <button onClick={handleClick}>Sign In with Google</button>}
+                            </div>
+                            <Grid container>
+                                <Grid item xs>
+                                    <Link onClick={handlePasswordReset} href="#" variant="body2">
+                                        Forgot password?
+                                    </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Link onClick={() => navigate("/register")} href="#" variant="body2">
+                                        {"Don't have an account? Sign Up"}
+                                    </Link>
+                                </Grid>
                             </Grid>
                             <Grid item>
-                                <Link onClick={() => navigate("/register")} href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
+                                    <Link onClick={() => navigate("/")} href="#" variant="body2">
+                                        {"Go back to homepage"}
+                                    </Link>
                             </Grid>
-                        </Grid>
+                        </Box>
                     </Box>
-                </Box>
+                </Grid>
             </Grid>
-        </Grid>
+
     );
 }

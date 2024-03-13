@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore';
 export default function Register() {
     const navigate = useNavigate();
     const db = getFirestore();
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -31,6 +33,7 @@ export default function Register() {
 
     const [userCredentials, setUserCredentials] = React.useState({});
     const [error, setError] = React.useState("");
+
 
     function handleCredentials(e) {
         setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
@@ -67,6 +70,7 @@ export default function Register() {
                 // Handle errors from Firebase Authentication
                 setError(error.message);
             });
+
     }
 
     console.log(auth);
@@ -107,6 +111,7 @@ export default function Register() {
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             {/* <Grid item xs={12} sm={6}>
+
                                 <TextField
                                     autoComplete="given-name"
                                     name="firstName"
@@ -152,6 +157,7 @@ export default function Register() {
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControlLabel
+
                                     control={<Checkbox value="allowExtraEmails" color="primary" />}
                                     label="I want to receive inspiration, marketing promotions and updates via email."
                                 />
@@ -174,9 +180,15 @@ export default function Register() {
                         }
 
                         <Grid container justifyContent="flex-end">
+
                             <Grid item>
                                 <Link onClick={() => navigate("/login")} href="#" variant="body2">
                                     Already have an account? Sign in
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link onClick={() => navigate("/")} href="#" variant="body2">
+                                    {"Go back to homepage"}
                                 </Link>
                             </Grid>
                         </Grid>
