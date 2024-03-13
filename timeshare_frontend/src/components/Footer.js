@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Grid, Link, Typography, Container, IconButton } from '@mui/material';
+import { Box, Grid, Typography, Container, IconButton, Link } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -45,7 +45,7 @@ const Footer = () => {
                         </Typography>
                         <Link href="#" color="inherit" display="block">Customer support</Link>
                         <Link href="#" color="inherit" display="block">Terms and conditions</Link>
-                        <Link href="#" color="inherit" display="block">Privacy Policy</Link>
+                        <Link href="/privacy-policy" color="inherit" display="block">Privacy Policy</Link>
                     </Grid>
                     <Grid item xs={6} sm={3} md={2}>
                         <Typography variant="subtitle1" color="text.primary" gutterBottom>
@@ -76,6 +76,6 @@ const Footer = () => {
             </Container>
         </Box>
     );
-};
+}
 
 export default Footer;
