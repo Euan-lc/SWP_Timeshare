@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import "./customerAccount.css";
 import Navbar from '../../components/navbar/Navbar';
@@ -8,33 +8,21 @@ import { Rating } from 'react-simple-star-rating';
 
 const CustomerAccount = () => {
   const [bookingInfo, setBookingInfo] = useState(null);
+  const [loading, setLoading] = useState(true);  // Loading state
   const [properties, setProperties] = useState({});
+  const [comment, setComment] = useState('');
+  const [rating, setRating] = useState(0)
   const auth = getAuth();
   const db = getFirestore();
 
-  useEffect(() => {
-    const fetchUserBookingInfo = async () => {
-      const user = auth.currentUser;
-      if (user) {
-        const bookingRef = doc(db, 'bookings', user.uid);
-        try {
-          const docSnap = await getDoc(bookingRef);
-          if (docSnap.exists()) {
-            const bookingsData = docSnap.data();
-            setBookingInfo(bookingsData);
-            // Fetch property details for each booking
-            fetchProperties(bookingsData.timeshares);
-          } else {
-            console.log("No such booking info!");
-          }
-        } catch (error) {
-          console.error("Error fetching booking info: ", error);
-        }
-      }
-    };
+  const handleChange = (event) => {
+    setComment(event.target.value);
+  };
 
-    fetchUserBookingInfo();
-  }, [auth, db]);
+  const handleRating = (rate) => {
+    console.log(rate);
+    setRating(rate);
+  }
 
   const fetchProperties = async (timeshares) => {
     const propertiesPromises = Object.keys(timeshares).map(async (timeshareId) => {
@@ -48,29 +36,52 @@ const CustomerAccount = () => {
     setProperties(propertiesObj);
   };
 
-  const [rating, setRating] = useState(0)
-
-  const handleRating = (rate) => {
-    console.log(rate);
-    setRating(rate);
-  }
-
-  const [comment, setComment] = useState('');
-
-  const handleChange = (event) => {
-    setComment(event.target.value);
+  const fetchUserBookingInfo = async (uid) => {
+    const bookingRef = doc(db, 'bookings', uid);
+    try {
+      const docSnap = await getDoc(bookingRef);
+      if (docSnap.exists()) {
+        const bookingsData = docSnap.data();
+        setBookingInfo(bookingsData);
+        fetchProperties(bookingsData.timeshares);
+      } else {
+        console.log("No such booking info!");
+      }
+    } catch (error) {
+      console.error("Error fetching booking info: ", error);
+    }
+    setLoading(false);  // Set loading to false after fetching data
   };
 
-  const handleSubmit = async(timeshareId, rating) => {
-    try{ 
-    // event.preventDefault();
-    console.log("Comment submitted :", comment);
-    console.log("TimeshareId :", timeshareId);
-    console.log("Rating :", rating);
-    setComment('');
-    const api = `https://swp-timeshare-back.vercel.app/api/review?id=${timeshareId}&rating=${rating}&comment=${comment}`;
+  useEffect(() => {
+    // Listen for auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchUserBookingInfo(user.uid);
+      } else {
+        setLoading(false);
+      }
+    });
 
-    await fetch(api, { method : 'POST' });}
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, [auth, db]);
+
+  if (loading) {
+    return <div>Loading...</div>;  // Display a loading message while waiting for auth state
+  }
+
+  const handleSubmit = async (event, timeshareId) => {
+    try {
+      event.preventDefault();
+      console.log("Comment submitted :", comment);
+      console.log("TimeshareId :", timeshareId);
+      console.log("Rating :", rating);
+      setComment('');
+      const api = `https://swp-timeshare-back.vercel.app/api/review?id=${timeshareId}&rating=${rating}&comment=${comment}`;
+
+      await fetch(api, { method: 'POST' });
+    }
     catch (error) {
       console.log("Error enculard");
     }
@@ -102,7 +113,7 @@ const CustomerAccount = () => {
                         <Rating onClick={handleRating} ratingValue={rating} />
                       </div>
                       <br></br>
-                      <form onSubmit={() => handleSubmit(timeshareId, rating)}>
+                      <form onSubmit={(e) => handleSubmit(e, timeshareId)}>
                         <textarea
                           value={comment}
                           onChange={handleChange}
@@ -123,7 +134,7 @@ const CustomerAccount = () => {
           )}
         </div>
       </div>
-      
+
     </div>
   );
 };
