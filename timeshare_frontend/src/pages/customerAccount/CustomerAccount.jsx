@@ -50,24 +50,31 @@ const CustomerAccount = () => {
   return (
     <div>
       <Navbar />
-      <Sidebar />
-      <div className="bookings">
-        <h2>Your Bookings</h2>
-        {bookingInfo ? (
-          <div>
-            {Object.entries(bookingInfo.timeshares).map(([timeshareId, details]) => (
-              <div key={timeshareId}>
-                <h3>{properties[timeshareId]?.name}</h3>
-                <img className="img" src={properties[timeshareId]?.img} alt={properties[timeshareId]?.name} />
-                <p>Check In: {details.startDate?.toDate().toLocaleDateString()}</p>
-                <p>Check Out: {details.endDate?.toDate().toLocaleDateString()}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No bookings found.</p>
-        )}
+      <div className='container'>
+        <Sidebar />
+        <div className="bookings">
+          <h2>Your Bookings</h2>
+          {bookingInfo ? (
+            <div>
+              {Object.entries(bookingInfo.timeshares).map(([timeshareId, details]) => (
+                <div key={timeshareId} className='booking'>
+                  <h3>{properties[timeshareId]?.name}</h3>
+                  <div>
+                    <img className="img" src={properties[timeshareId]?.img} alt={properties[timeshareId]?.name} />
+                  </div>
+                  <div className="dates">
+                    <p>Check In: {details.startDate?.toDate().toLocaleDateString()}</p>
+                    <p>Check Out: {details.endDate?.toDate().toLocaleDateString()}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No bookings found.</p>
+          )}
+        </div>
       </div>
+      
     </div>
   );
 };
