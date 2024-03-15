@@ -6,7 +6,7 @@
 // // import Box from '@mui/material/Box';
 // import Container from '@mui/material/Container';
 import "./home.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, forwardRef } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { Featured, Featured2 } from "../../components/featured/FeaturedList";
@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home() {
     const [properties, setProperties] = useState([]);
+    const featuredRef = useRef();
+    const headerRef = useRef();
 
     useEffect(() => {
         const fetchProperties = async () => {
@@ -37,12 +39,16 @@ export default function Home() {
         fetchProperties();
     }, []);
 
+    const scrollToElement = (elm) => {
+        elm.current.scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
         <div>
             <Navbar/>
-            <Header/>
+            <Header ref={headerRef} scrollToElement={scrollToElement}/>
             <div className="homeContainer">
-                <Featured/>
+                <Featured ref={featuredRef}/>
                 <Featured2/>
                 <h1 className="homeTitle">Popular properties</h1>
                 <Popular/>

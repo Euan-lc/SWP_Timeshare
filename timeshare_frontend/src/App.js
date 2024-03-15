@@ -3,7 +3,7 @@ import {ThemeProvider, createTheme} from '@mui/material/styles';
 // import Layout from "./pages/Layout";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./pages/Home/Home";
-
+import Header from "./components/header/Header";
 import List from "./pages/List/List";
 import Timeshare from "./pages/timeshare/Timeshare2.jsx";
 import Checkout from "./pages/checkout/Checkout";
@@ -18,6 +18,7 @@ import { useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { selectUsers } from "./store/usersSlice.js";
 import { FaRegLifeRing } from "react-icons/fa";
+import { Featured } from "./components/featured/FeaturedList.jsx";
 
 const clientId = "122285275633-uldisg6noor0qau5shbh6hmc5j6mmtai.apps.googleusercontent.com"
 
@@ -45,6 +46,10 @@ function App() {
 
         gapi.load('client:auth2', start);
     }, []);
+
+    const scrollToElement = (elm) => {
+        elm.current.scrollIntoView({ behavior: "smooth" });
+    };
     
     return (
         <ThemeProvider theme={theme}>
@@ -61,6 +66,7 @@ function App() {
                     <Route path="/terms-and-conditions" element={<TermsAndConditions/>}/>
                     <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
                     <Route path="/about-us" element={<AboutUs/>}/>
+                    <Route path="/featured-properties" element={<Featured scrollToElement={scrollToElement} />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

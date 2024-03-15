@@ -18,8 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { it } from "date-fns/locale";
 
-
-export default function Header({type}) {
+export default function Header({type, featuredRef, scrollToElement}) {
     const navigate = useNavigate();
 
     const [destination, setDestination] = useState("");
@@ -50,8 +49,15 @@ export default function Header({type}) {
     };
 
     const handleSearch = () => {
-        navigate("/list", { state: { destination, date, options } });
-    }
+        if (type !== "list") {
+            navigate("/list", { state: { destination, date, options } });
+            if (featuredRef.current) {
+                featuredRef.current.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            navigate("/list", { state: { destination, date, options } });
+        }
+    };
 
     const dateRef = useRef(null);
     const clickRef = useRef(null);
@@ -69,13 +75,8 @@ export default function Header({type}) {
             if (clickRef.current && !clickRef.current.contains(event.target) && openOptions && !event.target.closest('.options')) {
                 setOpenOptions(false);
             }
-            
         }
-    
-
-
         document.addEventListener('click', handleOutsideClick);
-
         return () => {
         document.removeEventListener('click', handleOutsideClick);
         };
@@ -102,6 +103,14 @@ export default function Header({type}) {
             setDate([ranges.selection]);
         }
     };
+
+    const destinationRef = useRef();
+    
+    const handleNavClick = () => {
+        if (scrollToElement && destinationRef.current) {
+            scrollToElement(destinationRef.current);
+        }
+    };
     
 
     return (
@@ -110,7 +119,7 @@ export default function Header({type}) {
                 <div className="headerList">
                     <div className="headerListItem active">
                         <Icon><HotelRoundedIcon color="secondary" className="icon"/></Icon>
-                        <span className="category">Book a Timeshare</span>
+                        <span className="category" ref={destinationRef} onClick={handleNavClick}>Book a Timeshare</span>
                     </div>
                     <div className="headerListItem">
                         <Icon><SellRoundedIcon color="secondary" className="icon"/></Icon>
