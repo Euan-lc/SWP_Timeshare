@@ -10,7 +10,7 @@ import Checkout from "./pages/checkout/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CustomerAccount from "./pages/customerAccount/CustomerAccount";
-import PrivacyPolicy from './pages/privacyPolicy/PrivacyPolicy.jsx';
+import PrivacyPolicy from './pages/privacyPolicy/PrivacyPolicy';
 import TermsAndConditions from "./pages/termsAndConditions/TermsAndCondition.jsx";
 import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 import { gapi } from 'gapi-script';

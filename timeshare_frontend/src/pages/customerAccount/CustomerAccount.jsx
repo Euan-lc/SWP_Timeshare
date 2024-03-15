@@ -4,6 +4,24 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import "./customerAccount.css";
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
+import { Rating } from 'react-simple-star-rating';
+
+const Stars = () => {
+  const [rating, setRating] = useState(0)
+
+  const handleRating = (rate) => {
+    console.log(rate);
+    setRating(rate);
+  }
+
+  return (
+    <>
+    <p className='review'>Review your trip</p>
+    <Rating onClick={handleRating} ratingValue={rating} />
+      
+    </>
+  );
+}
 
 const CustomerAccount = () => {
   const [bookingInfo, setBookingInfo] = useState(null);
@@ -59,12 +77,19 @@ const CustomerAccount = () => {
               {Object.entries(bookingInfo.timeshares).map(([timeshareId, details]) => (
                 <div key={timeshareId} className='booking'>
                   <h3>{properties[timeshareId]?.name}</h3>
-                  <div>
-                    <img className="img" src={properties[timeshareId]?.img} alt={properties[timeshareId]?.name} />
-                  </div>
-                  <div className="dates">
-                    <p>Check In: {details.startDate?.toDate().toLocaleDateString()}</p>
-                    <p>Check Out: {details.endDate?.toDate().toLocaleDateString()}</p>
+                  <div className="container-two">
+                    <div className="container-img">
+                      <img className="img" src={properties[timeshareId]?.img} alt={properties[timeshareId]?.name} />
+                    </div>
+                    <div>
+                      <div className="dates">
+                        <p>Check In: {details.startDate?.toDate().toLocaleDateString()}</p>
+                        <p>Check Out: {details.endDate?.toDate().toLocaleDateString()}</p>
+                      </div>
+                      <div>
+                        <Stars/>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
