@@ -1,6 +1,5 @@
 import "./app.css";
 import {ThemeProvider, createTheme} from '@mui/material/styles';
-// import Layout from "./pages/Layout";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./pages/Home/Home";
 
@@ -18,6 +17,7 @@ import { useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { selectUsers } from "./store/usersSlice.js";
 import { FaRegLifeRing } from "react-icons/fa";
+import Admin from "./pages/admin/Admin.jsx";
 
 const clientId = "122285275633-uldisg6noor0qau5shbh6hmc5j6mmtai.apps.googleusercontent.com"
 
@@ -53,6 +53,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
+                    <Route path="/admin" element={<Admin/>}/>
                     <Route path="/account" element={<CustomerAccount/>}/>
                     <Route path="/account/mytimeshares" element={<CustomerAccount/>}/>
                     <Route path="/list" element={<List/>}/>
