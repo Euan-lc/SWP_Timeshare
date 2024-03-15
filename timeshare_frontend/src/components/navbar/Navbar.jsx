@@ -55,7 +55,7 @@ export default function Navbar() {
                     {!isLoggedIn && <button onClick={() => navigate("/register")} className="navButton">Register</button>}
                     {!isLoggedIn && <button onClick={() => navigate("/login")} className="navButton">Login</button>}
                     {isLoggedIn && <button onClick={handleLogOut} className="navButton">Logout</button>}
-                    {isLoggedIn && <IconButton><AccountCircleIcon onClick={() => navigate("/account")} className="navIcon"/></IconButton>}
+                    {isLoggedIn && <IconButton onClick={() => navigate("/account")} ><AccountCircleIcon className="navIcon"/></IconButton>}
                 </div>
             </div>
         </div>

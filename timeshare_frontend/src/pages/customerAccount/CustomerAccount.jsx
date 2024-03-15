@@ -6,23 +6,6 @@ import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import { Rating } from 'react-simple-star-rating';
 
-const Stars = () => {
-  const [rating, setRating] = useState(0)
-
-  const handleRating = (rate) => {
-    console.log(rate);
-    setRating(rate);
-  }
-
-  return (
-    <>
-    <p className='review'>Review your trip</p>
-    <Rating onClick={handleRating} ratingValue={rating} />
-      
-    </>
-  );
-}
-
 const CustomerAccount = () => {
   const [bookingInfo, setBookingInfo] = useState(null);
   const [properties, setProperties] = useState({});
@@ -65,6 +48,34 @@ const CustomerAccount = () => {
     setProperties(propertiesObj);
   };
 
+  const [rating, setRating] = useState(0)
+
+  const handleRating = (rate) => {
+    console.log(rate);
+    setRating(rate);
+  }
+
+  const [comment, setComment] = useState('');
+
+  const handleChange = (event) => {
+    setComment(event.target.value);
+  };
+
+  const handleSubmit = async(timeshareId, rating) => {
+    try{ 
+    // event.preventDefault();
+    console.log("Comment submitted :", comment);
+    console.log("TimeshareId :", timeshareId);
+    console.log("Rating :", rating);
+    setComment('');
+    const api = `https://swp-timeshare-back.vercel.app/api/review?id=${timeshareId}&rating=${rating}&comment=${comment}`;
+
+    await fetch(api, { method : 'POST' });}
+    catch (error) {
+      console.log("Error enculard");
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -81,14 +92,27 @@ const CustomerAccount = () => {
                     <div className="container-img">
                       <img className="img" src={properties[timeshareId]?.img} alt={properties[timeshareId]?.name} />
                     </div>
+                    <div className="dates">
+                      <p>Check In: {details.startDate?.toDate().toLocaleDateString()}</p>
+                      <p>Check Out: {details.endDate?.toDate().toLocaleDateString()}</p>
+                    </div>
                     <div>
-                      <div className="dates">
-                        <p>Check In: {details.startDate?.toDate().toLocaleDateString()}</p>
-                        <p>Check Out: {details.endDate?.toDate().toLocaleDateString()}</p>
-                      </div>
                       <div>
-                        <Stars/>
+                        <p className='review'>Review your trip</p>
+                        <Rating onClick={handleRating} ratingValue={rating} />
                       </div>
+                      <br></br>
+                      <form onSubmit={() => handleSubmit(timeshareId, rating)}>
+                        <textarea
+                          value={comment}
+                          onChange={handleChange}
+                          placeholder="Leave a comment here…"
+                          rows={4}
+                          cols={50}
+                        />
+                        <br />
+                        <button className="submitBtn" type="submit">Submit</button>
+                      </form>
                     </div>
                   </div>
                 </div>
