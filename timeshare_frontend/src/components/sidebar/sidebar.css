@@ -41,6 +41,14 @@
     color: #000;
     transition: all 0.5s;
 }
+
+.last-link:hover {
+    background:lightgray;
+    color: #000;
+    transition: all 0.5s;
+    border-radius: 0px 0px 10px 10px;
+}
+
 .active{
     background: lightgray;
     color: #000;

@@ -1,5 +1,6 @@
 import "./sidebar.css";
-import { FaBars, FaStar } from "react-icons/fa";
+import { FaBars, FaPenToSquare } from "react-icons/fa";
+import EditIcon from '@mui/icons-material/Edit';
 import { NavLink } from "react-router-dom";
 import { IoMdChatbubbles } from "react-icons/io";
 
@@ -11,14 +12,14 @@ const Sidebar = () => {
             icon: <FaBars/>
         },
         {
-            path: "/account/reviews",
-            name: "Reviews",
-            icon: <FaStar/>
-        },
-        {
             path: "/account/support",
             name: "Support",
             icon: <IoMdChatbubbles/>
+        },
+        {
+            path: "/account/edit-profile",
+            name: "Edit Profile",
+            icon: <EditIcon/>
         },
     ]
 
@@ -32,7 +33,7 @@ const Sidebar = () => {
                 </div>
                 {
                     menuItem.map((item, index) => (
-                        <NavLink to={item.path} key={index} className="link">
+                        <NavLink to={item.path} key={index} className={"link" + (index === menuItem.length - 1 ? " last-link" : "")}>
                             <div className="icon">{item.icon}</div>
                             <div className="link_text">{item.name}</div>
                         </NavLink>
