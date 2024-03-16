@@ -34,19 +34,18 @@
     color: #fff;
     padding: 10px 15px;
     gap: 15px;
-    transition: all 0.5s;
+    transition: 
+    all 0.5s;
 }
+
+.link_text {
+    text-decoration: none;
+}
+
 .link:hover{
     background:lightgray;
     color: #000;
     transition: all 0.5s;
-}
-
-.last-link:hover {
-    background:lightgray;
-    color: #000;
-    transition: all 0.5s;
-    border-radius: 0px 0px 10px 10px;
 }
 
 .active{

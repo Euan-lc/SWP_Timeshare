@@ -18,6 +18,7 @@ import { useEffect } from 'react';
 // import { selectUsers } from "./store/usersSlice.js";
 import Admin from "./pages/admin/Admin.jsx";
 import CustomerStaff from "./pages/customerStaff/CustomerStaff.jsx";
+import EditProfile from "./pages/customerAccount/editProfile/EditProfile";
 
 const clientId = "122285275633-uldisg6noor0qau5shbh6hmc5j6mmtai.apps.googleusercontent.com"
 
@@ -56,6 +57,7 @@ function App() {
                     <Route path="/admin" element={<Admin/>}/>
                     <Route path="/account" element={<CustomerAccount/>}/>
                     <Route path="/account/mytimeshares" element={<CustomerAccount/>}/>
+                    <Route path="/account/edit-profile" element={<CustomerAccount/>}/>
                     <Route path="/list" element={<List/>}/>
                     <Route path="/list/timeshare" element={<Timeshare/>}/>
                     <Route path="/list/timeshare/checkout" element={<Checkout/>}/>
