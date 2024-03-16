@@ -21,13 +21,14 @@ const getRatingAdjective = (rating) => {
 export default function RecommendedList({ properties }) {
     const navigate = useNavigate();
     const [propertyDetails, setPropertyDetails] = useState([]);
-    const [date] = useState([
+    const [date, setDate] = useState([
         {
             startDate: new Date(),
             endDate: new Date(),
             key: "selection",
         },
     ]);
+
     const [options] = useState(
         {
             adult: 1,
@@ -35,6 +36,19 @@ export default function RecommendedList({ properties }) {
             room: 1,
         },
     );
+
+    useEffect(() => {
+        setDate((currentDate) => {
+          const newEndDate = new Date(currentDate[0].startDate.getTime());
+          newEndDate.setDate(newEndDate.getDate() + 1);
+          return [
+            {
+              ...currentDate[0],
+              endDate: newEndDate,
+            },
+          ];
+        });
+      }, []);
 
     useEffect(() => {
         const fetchPropertyDetails = async () => {

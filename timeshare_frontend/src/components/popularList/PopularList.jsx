@@ -3,13 +3,13 @@ import Hanoi from "../../images/hanoi.jpg";
 import HoChiMinh from "../../images/hochiminh.jpg";
 import DaLat from "../../images/dalat.jpg";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PopularList() {
 
     const navigate = useNavigate();
 
-    const [date] = useState([
+    const [date, setDate] = useState([
         {
             startDate: new Date(),
             endDate: new Date(),
@@ -23,6 +23,19 @@ export default function PopularList() {
             room: 1,
         },
     );
+
+    useEffect(() => {
+        setDate((currentDate) => {
+          const newEndDate = new Date(currentDate[0].startDate.getTime());
+          newEndDate.setDate(newEndDate.getDate() + 1);
+          return [
+            {
+              ...currentDate[0],
+              endDate: newEndDate,
+            },
+          ];
+        });
+      }, []);
 
     return (
         <div className="pList">
