@@ -13,10 +13,9 @@ import { DateRange } from "react-date-range";
 import { useState } from "react";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { it } from "date-fns/locale";
 
 
 export default function Header({type}) {
@@ -27,10 +26,19 @@ export default function Header({type}) {
     const [date, setDate] = useState([
         {
             startDate: new Date(),
-            endDate: new Date(),
+            endDate: new Date(new Date().setDate(new Date().getDate() + 1)),
             key: "selection",
         },
     ]);
+
+    useEffect(() => {
+        setDate((currentDate) => {
+            const newEndDate = new Date(currentDate.startDate);
+            newEndDate.setDate(newEndDate.getDate() + 1);
+            return { ...currentDate, endDate: newEndDate };
+        });
+    }, []);
+
     const [openOptions, setOpenOptions] = useState(false)
     const [options, setOptions] = useState(
         {
@@ -81,13 +89,13 @@ export default function Header({type}) {
         };
     }, [openDate, openOptions]);
 
-    const handleSearchClick = () => {
-        setOpenDate(!openDate);
-      };
+    // const handleSearchClick = () => {
+    //     setOpenDate(!openDate);
+    //   };
 
     const handleDateChange = (ranges) => {
         const currentRange = ranges.selection;
-        if (ranges.selection.endDate == ranges.selection.startDate){
+        if (ranges.selection.endDate === ranges.selection.startDate){
             const newEndDate = new Date(currentRange.endDate);
             newEndDate.setDate(newEndDate.getDate() + 1);
             const updatedRange = {

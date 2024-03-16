@@ -41,7 +41,7 @@ export default function Timeshare() {
     };
     useEffect(() => {
         fetchProperty()
-    }, []);
+    });
     const handleOpen = (i) => {
         setSlideNumber(i);
         setOpen(true);

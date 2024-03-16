@@ -65,7 +65,7 @@ const CustomerAccount = () => {
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [auth, db]);
+  });
 
   if (loading) {
     return <div>Loading...</div>;  // Display a loading message while waiting for auth state

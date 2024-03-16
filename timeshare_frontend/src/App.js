@@ -9,14 +9,13 @@ import Checkout from "./pages/checkout/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CustomerAccount from "./pages/customerAccount/CustomerAccount";
-import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy.jsx';
 import TermsAndConditions from "./pages/TermsAndConditions/TermsAndCondition.jsx";
 import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
-import { useSelector } from "react-redux";
-import { selectUsers } from "./store/usersSlice.js";
-import { FaRegLifeRing } from "react-icons/fa";
+// import { useSelector } from "react-redux";
+// import { selectUsers } from "./store/usersSlice.js";
 import Admin from "./pages/admin/Admin.jsx";
 
 const clientId = "122285275633-uldisg6noor0qau5shbh6hmc5j6mmtai.apps.googleusercontent.com"
@@ -33,7 +32,7 @@ const theme = createTheme({
 });
 
 function App() {
-    const user = useSelector(selectUsers);
+    // const user = useSelector(selectUsers);
 
     useEffect(() => {
         function start() {
