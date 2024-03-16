@@ -46,7 +46,7 @@ export default function Register() {
         createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
             .then(async (userCredential) => {
                 const uid = userCredential.user.uid;
-                const apiUrl = `https://swp-timeshare-back.vercel.app/api/customer=${uid}`;
+                const apiUrl = `https://swp-timeshare-back.vercel.app/api/customer?id=${uid}`;
 
                 fetch(apiUrl, { method: 'POST' })
                     .then(data => {
