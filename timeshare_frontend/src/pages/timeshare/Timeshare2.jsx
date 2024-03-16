@@ -34,14 +34,13 @@ export default function Timeshare() {
             const data = await response.json();
             let photoSrcList = data.images.map((x)=>{return {src: x}})
             setPhotos([...photos, ...photoSrcList]);
-            console.log(photos)
         } catch (error) {
             console.error('Error fetching properties:', error);
         }
     };
     useEffect(() => {
         fetchProperty()
-    });
+    },[]);
     const handleOpen = (i) => {
         setSlideNumber(i);
         setOpen(true);
