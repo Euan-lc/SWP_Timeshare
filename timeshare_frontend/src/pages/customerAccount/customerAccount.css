@@ -22,11 +22,12 @@ h3 {
 
 .container {
     display: flex;
-    max-width: 90%;
+    max-width: 100%;
 }
 
 .container_sidebar {
     margin-top: 50px;
+    margin-left: 100px;
 }
 
 .container-two {

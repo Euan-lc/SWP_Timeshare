@@ -23,7 +23,6 @@ const Sidebar = () => {
     ]
 
     return (
-        <div className="container_sidebar">
             <div className="sidebar">
                 <div className="top_section">
                     <h1 className="logo">Timeshare</h1>
@@ -40,7 +39,6 @@ const Sidebar = () => {
                     ))
                 }
             </div>
-        </div>
     )
 }
 
