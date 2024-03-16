@@ -78,7 +78,7 @@
   }
   
   .hotelDesc {
-    font-size: 14px;
+    font-size: 30px;
     margin-top: 20px;
   }
   
@@ -110,7 +110,18 @@
     cursor: pointer;
     border-radius: 5px;
   }
-  
+  .hotelDetailsTexts > h3{
+    padding: 10px;
+    background-color: lightgray;
+    font-size:20px;
+    margin-bottom: 0px;
+  }
+  .review-item{
+    border: black 3px solid;
+    margin: 5px;
+    width:50%;
+  }
+
   .slider{
     position: sticky;
     top: 0;

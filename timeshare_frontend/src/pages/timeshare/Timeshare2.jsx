@@ -6,9 +6,54 @@ import IconButton from "@mui/material/IconButton";
 import Footer from "../../components/Footer";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import {useNavigate, useLocation} from "react-router-dom";
+import InfiniteScroll from 'react-infinite-scroller';
+import SearchItem from "../../components/searchItem/SearchItem";
+import StarIcon from '@mui/icons-material/Star';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+
+function Reviews(props) {
+    const [reviews, setReviews] = useState([])
+    const [hasMoreReviews, setHasMoreReviews] = useState(true)
+    const timeshareId = props.timeshareId
+    const limit = 5;
+    const fetchReviews = async (page) => {
+        page = page * limit
+        console.log(`fetching https://swp-timeshare-back.vercel.app/api/review?id=${props.timeshareId}&limit=${limit}&offset=${page}`)
+
+        try {
+            let response = await fetch(`https://swp-timeshare-back.vercel.app/api/review?id=${props.timeshareId}&limit=${limit}&offset=${page}`);
+            if (!response.ok) {
+                throw new Error('failed to fetch reviews')
+            }
+            const data = await response.json();
+            if (data.length) {
+                setReviews([...reviews, ...data])
+            } else {
+                setHasMoreReviews(false)
+            }
+        } catch (error) {
+            console.error('error fetching reviews', error)
+        }
+    }
+
+    return (<>
+        <InfiniteScroll
+            pageStart={-1}
+            loadMore={fetchReviews}
+            hasMore={hasMoreReviews}
+            loader={<div className="loader" key={0}>Loading ...</div>}
+        >
+            {reviews.map((review) => (
+                <div className='review-item'><AccountCircleIcon/> {review['rating']} <StarIcon/><br/><FormatQuoteIcon/>{review['comment']}<FormatQuoteIcon/></div>
+            ))}
+        </InfiniteScroll>
+
+    </>)
+}
 
 export default function Timeshare() {
     const navigate = useNavigate();
@@ -16,7 +61,7 @@ export default function Timeshare() {
 
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
-    const [property] = useState(location.state.property);
+    const [property, setProperty] = useState(location.state.property);
     const [timeshareId] = useState(location.state.timeshareId);
     const [date] = useState(location.state.date);
     const [info] = useState(location.state.info);
@@ -32,8 +77,11 @@ export default function Timeshare() {
                 throw new Error('Failed to fetch photos');
             }
             const data = await response.json();
-            let photoSrcList = data.images.map((x)=>{return {src: x}})
+            let photoSrcList = data.images.map((x) => {
+                return {src: x}
+            })
             setPhotos([...photos, ...photoSrcList]);
+            setProperty(data);
         } catch (error) {
             console.error('Error fetching properties:', error);
         }
@@ -52,7 +100,7 @@ export default function Timeshare() {
         return () => {
             document.removeEventListener("keydown", escFunction, false);
         };
-    },[]);
+    }, []);
     const handleOpen = (i) => {
         setSlideNumber(i);
         setOpen(true);
@@ -62,10 +110,10 @@ export default function Timeshare() {
         let newSlideNumber;
 
         if (direction === "l") {
-            if(slideNumber === 0){
-                newSlideNumber = photos.length -1;
-            }else{
-                newSlideNumber = slideNumber -1;
+            if (slideNumber === 0) {
+                newSlideNumber = photos.length - 1;
+            } else {
+                newSlideNumber = slideNumber - 1;
             }
             // newSlideNumber = slideNumber === 0 ? photos.length : (slideNumber - 1)%photos.length;
         } else {
@@ -121,12 +169,7 @@ export default function Timeshare() {
                         <IconButton><LocationOnIcon/></IconButton>
                         <span>{property.address}</span>
                     </div>
-                    <span className="hotelDistance">
-            Excellent location
-          </span>
-                    <span className="hotelPriceHighlight">
-            Only available on timeshare.com
-          </span>
+
                     <div className="hotelImages">
                         {photos.map((photo, i) => (
                             <div className="hotelImgWrapper" key={i}>
@@ -141,17 +184,17 @@ export default function Timeshare() {
                     </div>
                     <div className="hotelDetails">
                         <div className="hotelDetailsTexts">
-                            <h1 className="hotelTitle">Stay in the heart of City</h1>
-                            <p className="hotelDesc">
+                            <h1 className="hotelDesc">
                                 {property.description}
-                            </p>
+                            </h1>
+                            <h3>
+                                Surface area : {property.size}m²<br/>
+                                Capacity : {property.capacity}<br/>
+                                Number of rooms : {property.nbRoom}<br/>
+                            </h3>
                         </div>
                         <div className="hotelDetailsPrice">
                             <h1>Perfect for a long stay!</h1>
-                            <span>
-                Located in the real heart of {property.address}, this property has an
-                excellent location score of {info.rating}!
-              </span>
                             <h2>
                                 <b>${totalDays * property.price}</b> ({totalDays} night(s))
                             </h2>
@@ -165,6 +208,12 @@ export default function Timeshare() {
                             })}>Book
                             </button>
                         </div>
+                    </div>
+                    <div className='review-container'>
+                        <h2>
+                            <span>Reviews :  </span><span>{info.rating}<StarIcon/></span>
+                        </h2>
+                        <Reviews timeshareId={timeshareId}/>
                     </div>
                 </div>
             </div>
