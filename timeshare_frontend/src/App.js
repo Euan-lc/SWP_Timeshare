@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 // import { useSelector } from "react-redux";
 // import { selectUsers } from "./store/usersSlice.js";
 import Admin from "./pages/admin/Admin.jsx";
+import CustomerStaff from "./pages/customerStaff/CustomerStaff.jsx";
 
 const clientId = "122285275633-uldisg6noor0qau5shbh6hmc5j6mmtai.apps.googleusercontent.com"
 
@@ -61,6 +62,7 @@ function App() {
                     <Route path="/terms-and-conditions" element={<TermsAndConditions/>}/>
                     <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
                     <Route path="/about-us" element={<AboutUs/>}/>
+                    <Route path="/customer-staff" element={<CustomerStaff/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
