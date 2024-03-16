@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./list.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
@@ -8,9 +8,6 @@ import { useLocation } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import { useNavigate } from "react-router-dom";
 import Slider from 'react-slider';
-import IconButton from "@mui/material/IconButton";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import InfiniteScroll from 'react-infinite-scroller';
 
 export default function List() {
@@ -73,7 +70,7 @@ export default function List() {
 
     const handleDateChange = (ranges) => {
         const currentRange = ranges.selection;
-        if (ranges.selection.endDate == ranges.selection.startDate){
+        if (ranges.selection.endDate === ranges.selection.startDate){
             const newEndDate = new Date(currentRange.endDate);
             newEndDate.setDate(newEndDate.getDate() + 1);
             const updatedRange = {
