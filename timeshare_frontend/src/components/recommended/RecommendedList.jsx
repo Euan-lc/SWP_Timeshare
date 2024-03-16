@@ -1,5 +1,6 @@
 import "./recommendedList.css";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const getRatingAdjective = (rating) => {
     if (rating >= 5) {
@@ -18,8 +19,22 @@ const getRatingAdjective = (rating) => {
 };
 
 export default function RecommendedList({ properties }) {
-
+    const navigate = useNavigate();
     const [propertyDetails, setPropertyDetails] = useState([]);
+    const [date] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: "selection",
+        },
+    ]);
+    const [options] = useState(
+        {
+            adult: 1,
+            children: 0,
+            room: 1,
+        },
+    );
 
     useEffect(() => {
         const fetchPropertyDetails = async () => {
@@ -42,7 +57,10 @@ export default function RecommendedList({ properties }) {
     return (
         <div className="rp">
             {propertyDetails.map((property) => (
-                <div key={property.timeshareId} className="rpItem">
+                <div
+                    onClick={() => navigate("/list", { state: { destination: "Ho Chi Minh", date, options } })}
+                    key={property.timeshareId}
+                    className="rpItem">
                     <img
                         src={property.img}
                         alt={property.name}
