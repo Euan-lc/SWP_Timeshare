@@ -120,7 +120,7 @@ export default function List() {
                                     <span className="lsOptionText">
                                         Min price <small>per night</small>
                                     </span>
-                                    <input type="number" min={0} max={1000} className="lsOptionInput" 
+                                    <input type="number" min={0} max={150} className="lsOptionInput" 
                                     value={price.min === '' ? '' : parseInt(price.min)}
                                     onChange={(e) => handlePriceChange('min', parseInt(e.target.value))}/>
                                 </div>
@@ -128,7 +128,7 @@ export default function List() {
                                     <span className="lsOptionText">
                                         Max price <small>per night</small>
                                     </span>
-                                    <input type="number" min={0} max={1000} className="lsOptionInput" 
+                                    <input type="number" min={0} max={150} className="lsOptionInput" 
                                     value={price.max === '' ? '' : parseInt(price.max)}
                                     onChange={(e) => handlePriceChange('max', parseInt(e.target.value))}/>
                                 </div>
@@ -136,7 +136,7 @@ export default function List() {
                                     <Slider
                                         className="slider"
                                         min={0}
-                                        max={1000}
+                                        max={150}
                                         value={[parseInt(price.min), parseInt(price.max)]}
                                         onChange={(value) => {
                                             handlePriceChange('min', value[0]);
