@@ -22,7 +22,7 @@ export default function List() {
     const [options, setOptions] = useState(location.state.options);
     const [price, setPrice] = useState({
         min: location.state.price?.min || 0,
-        max: location.state.price?.max || 1050,
+        max: location.state.price?.max || 150,
     });
 
     const [properties, setProperties] = useState([]);

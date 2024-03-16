@@ -91,7 +91,10 @@ const CustomerAccount = () => {
     <div>
       <Navbar />
       <div className='container'>
-        <Sidebar />
+        <div>
+          <Sidebar />
+        </div>
+        
         <div className="bookings">
           <h2>Your Bookings</h2>
           {bookingInfo ? (
@@ -107,7 +110,7 @@ const CustomerAccount = () => {
                       <p>Check In: {details.startDate?.toDate().toLocaleDateString()}</p>
                       <p>Check Out: {details.endDate?.toDate().toLocaleDateString()}</p>
                     </div>
-                    <div>
+                    {/* <div>
                       <div>
                         <p className='review'>Review your trip</p>
                         <Rating onClick={handleRating} ratingValue={rating} />
@@ -124,7 +127,7 @@ const CustomerAccount = () => {
                         <br />
                         <button className="submitBtn" type="submit">Submit</button>
                       </form>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
