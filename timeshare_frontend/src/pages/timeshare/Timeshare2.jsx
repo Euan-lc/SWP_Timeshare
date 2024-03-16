@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Footer from "../../components/Footer";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import {useNavigate, useLocation} from "react-router-dom";
 
@@ -38,8 +38,20 @@ export default function Timeshare() {
             console.error('Error fetching properties:', error);
         }
     };
+
+    const escFunction = useCallback((event) => {
+        if (event.key === "Escape") {
+            setOpen(false)
+        }
+    }, []);
+
     useEffect(() => {
-        fetchProperty()
+        document.addEventListener("keydown", escFunction, false);
+        fetchProperty();
+
+        return () => {
+            document.removeEventListener("keydown", escFunction, false);
+        };
     },[]);
     const handleOpen = (i) => {
         setSlideNumber(i);
@@ -50,9 +62,14 @@ export default function Timeshare() {
         let newSlideNumber;
 
         if (direction === "l") {
-            newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+            if(slideNumber === 0){
+                newSlideNumber = photos.length -1;
+            }else{
+                newSlideNumber = slideNumber -1;
+            }
+            // newSlideNumber = slideNumber === 0 ? photos.length : (slideNumber - 1)%photos.length;
         } else {
-            newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+            newSlideNumber = slideNumber === photos.length ? 0 : (slideNumber + 1) % photos.length;
         }
 
         setSlideNumber(newSlideNumber)
