@@ -13,9 +13,7 @@
 
 .img {
     max-width: 100%;
-    object-fit: cover;
     border-radius: 10px;
-    position: relative;
 }
 
 h3 {
@@ -24,7 +22,11 @@ h3 {
 
 .container {
     display: flex;
-    max-width: 100%;
+    max-width: 90%;
+}
+
+.container_sidebar {
+    margin-top: 50px;
 }
 
 .container-two {
