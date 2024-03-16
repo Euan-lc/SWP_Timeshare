@@ -7,7 +7,6 @@ import IconButton from '@mui/material/IconButton';
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/usersSlice";
 
 export default function Navbar() {
     const navigate = useNavigate();
