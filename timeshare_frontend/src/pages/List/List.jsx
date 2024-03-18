@@ -57,17 +57,7 @@ export default function List() {
                                                         `&location=${destination}` +
                                                         (price.min && price.max ?
                                                             `&price=lt:${price.max}&price=gt:${price.min}` : '') +
-                                                        (rooms ? `&nbRoom=${rooms}` : ''));
-            console.log(`https://swp-timeshare-back.vercel.app/api/property/all` +
-                `?limit=10` +
-                `&offset=${offset}` +
-                `&sort_by=asc:price` +
-                `&start:${format(date[0].startDate, "yyyy-MM-dd")}` +
-                `&end:${format(date[0].endDate, "yyyy-MM-dd")}` +
-                `&location=${destination}` +
-                (price.min && price.max ?
-                    `&price=lt:${price.max}&price=gt:${price.min}` : '') +
-                (rooms ? `&nbRoom=${rooms}` : ''))
+                                                        (options.room ? `&nbRoom=${options.room}` : ''));
 
             // const baseUrl = `https://swp-timeshare-back.vercel.app/api/property/all
             //                                             ?limit=10
@@ -195,7 +185,7 @@ export default function List() {
                                         Room
                                     </span>
                                     <input type="number" min={1} className="lsOptionInput" placeholder={options.room}
-                                    onChange={(e) => {setRooms(e.target.value); handleOptionChange('room', parseInt(e.target.value))}}/>
+                                    onChange={(e) => handleOptionChange('room', parseInt(e.target.value))}/>
                                 </div>
                                 </div>
                             </div>
