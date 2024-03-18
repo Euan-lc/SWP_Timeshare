@@ -21,6 +21,7 @@ export default function List() {
         min: location.state.price?.min || 0,
         max: location.state.price?.max || 150,
     });
+    const [rooms, setRooms] = useState(null)
 
     const [properties, setProperties] = useState([]);
     const [hasMoreProps, setHasMoreProps] = useState(true);
@@ -47,15 +48,49 @@ export default function List() {
     const fetchProperties = async (page) => {
         try {
             let offset = page * 10;
-            var response = null;
-            const baseUrl = `https://swp-timeshare-back.vercel.app/api/property/all?limit=10&offset=${offset}&sort_by=asc:price&start:${date[0].startDate}&end:${date[0].endDate}&location=${destination}`;
-            const baseUrlWithBothPrice = `https://swp-timeshare-back.vercel.app/api/property/all?limit=10&offset=${offset}&sort_by=asc:price&start:${date[0].startDate}&end:${date[0].endDate}&location=${destination}&price=lt:${price.max}&price=gt:${price.min}`;
-            // const queryParams = ``;
-            if (price.min === '' && price.max === '') {
-                response = await fetch(`${baseUrl}`);
-            } else {
-                response = await fetch(`${baseUrlWithBothPrice}`);
-            }
+            var response = await fetch(`https://swp-timeshare-back.vercel.app/api/property/all` +
+                                                        `?limit=10` +
+                                                        `&offset=${offset}` +
+                                                        `&sort_by=asc:price` +
+                                                        `&start:${format(date[0].startDate, "yyyy-MM-dd")}` +
+                                                        `&end:${format(date[0].endDate, "yyyy-MM-dd")}` +
+                                                        `&location=${destination}` +
+                                                        (price.min && price.max ?
+                                                            `&price=lt:${price.max}&price=gt:${price.min}` : '') +
+                                                        (rooms ? `&nbRoom=${rooms}` : ''));
+            console.log(`https://swp-timeshare-back.vercel.app/api/property/all` +
+                `?limit=10` +
+                `&offset=${offset}` +
+                `&sort_by=asc:price` +
+                `&start:${format(date[0].startDate, "yyyy-MM-dd")}` +
+                `&end:${format(date[0].endDate, "yyyy-MM-dd")}` +
+                `&location=${destination}` +
+                (price.min && price.max ?
+                    `&price=lt:${price.max}&price=gt:${price.min}` : '') +
+                (rooms ? `&nbRoom=${rooms}` : ''))
+
+            // const baseUrl = `https://swp-timeshare-back.vercel.app/api/property/all
+            //                                             ?limit=10
+            //                                             &offset=${offset}
+            //                                             &sort_by=asc:price
+            //                                             &start:${date[0].startDate}
+            //                                             &end:${date[0].endDate}
+            //                                             &location=${destination}`;
+            //
+            // const baseUrlWithBothPrice = `https://swp-timeshare-back.vercel.app/api/property/all
+            //                                             ?limit=10
+            //                                             &offset=${offset}
+            //                                             &sort_by=asc:price
+            //                                             &start:${date[0].startDate}
+            //                                             &end:${date[0].endDate}
+            //                                             &location=${destination}
+            //                                             &price=lt:${price.max}&price=gt:${price.min}`;
+            // // const queryParams = ``;
+            // if (price.min === '' && price.max === '') {
+            //     response = await fetch(`${baseUrl}`);
+            // } else {
+            //     response = await fetch(`${baseUrlWithBothPrice}`);
+            // }
             if (!response.ok) {
                 throw new Error('Failed to fetch properties');
             }
@@ -160,7 +195,7 @@ export default function List() {
                                         Room
                                     </span>
                                     <input type="number" min={1} className="lsOptionInput" placeholder={options.room}
-                                    onChange={(e) => handleOptionChange('room', parseInt(e.target.value))}/>
+                                    onChange={(e) => {setRooms(e.target.value); handleOptionChange('room', parseInt(e.target.value))}}/>
                                 </div>
                                 </div>
                             </div>
