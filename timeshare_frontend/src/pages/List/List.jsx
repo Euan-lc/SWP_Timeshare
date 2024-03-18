@@ -58,29 +58,6 @@ export default function List() {
                                                         (price.min && price.max ?
                                                             `&price=lt:${price.max}&price=gt:${price.min}` : '') +
                                                         (options.room ? `&nbRoom=${options.room}` : ''));
-
-            // const baseUrl = `https://swp-timeshare-back.vercel.app/api/property/all
-            //                                             ?limit=10
-            //                                             &offset=${offset}
-            //                                             &sort_by=asc:price
-            //                                             &start:${date[0].startDate}
-            //                                             &end:${date[0].endDate}
-            //                                             &location=${destination}`;
-            //
-            // const baseUrlWithBothPrice = `https://swp-timeshare-back.vercel.app/api/property/all
-            //                                             ?limit=10
-            //                                             &offset=${offset}
-            //                                             &sort_by=asc:price
-            //                                             &start:${date[0].startDate}
-            //                                             &end:${date[0].endDate}
-            //                                             &location=${destination}
-            //                                             &price=lt:${price.max}&price=gt:${price.min}`;
-            // // const queryParams = ``;
-            // if (price.min === '' && price.max === '') {
-            //     response = await fetch(`${baseUrl}`);
-            // } else {
-            //     response = await fetch(`${baseUrlWithBothPrice}`);
-            // }
             if (!response.ok) {
                 throw new Error('Failed to fetch properties');
             }

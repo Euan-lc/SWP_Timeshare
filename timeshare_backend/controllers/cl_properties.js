@@ -39,7 +39,7 @@ exports.GetAllProperties = async (req, res) => {
                                             OR c.contractId IS NULL)
                                             ${req.query.price ? 'AND p.price between ' + req.query.price[1].split(':')[1] + ' AND ' + req.query.price[0].split(':')[1] : ''}
                                             ${req.query.location ? "AND p.address = '" + req.query.location + "'" : ''}
-                                            ${req.query.nbRoom ? "AND p.nbRoom = '" + req.query.nbRoom + "'" : ''}
+                                            ${req.query.nbRoom ? "AND p.nbRoom >= '" + req.query.nbRoom + "'" : ''}
                                         GROUP BY p.timeshareId
                                         ORDER BY ${sort[1]} ${sort[0]}
                                         LIMIT ${limit}

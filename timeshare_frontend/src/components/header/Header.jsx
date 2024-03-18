@@ -44,7 +44,7 @@ export default function Header({type}) {
         {
             adult: 1,
             children: 0,
-            room: 1,
+            room: 0
         },
     );
 
