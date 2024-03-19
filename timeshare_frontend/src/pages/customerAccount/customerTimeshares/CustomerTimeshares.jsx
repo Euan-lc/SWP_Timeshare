@@ -3,6 +3,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import "./customerTimeshares.css";
 import { Rating } from 'react-simple-star-rating';
+import { IconButton } from '@mui/material';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const CustomerTimeshares = () => {
 
@@ -120,6 +122,10 @@ const CustomerTimeshares = () => {
                         <button className="submitBtn" type="submit">Submit</button>
                       </form>
                     </div>
+                    <IconButton aria-label="Delete" color="inherit" component="a">
+                            <DeleteOutlineIcon/>
+                    </IconButton>
+                    
                   </div>
                 </div>
               ))}
