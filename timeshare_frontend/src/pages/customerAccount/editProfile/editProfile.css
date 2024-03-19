@@ -1,5 +1,5 @@
-h2 {
-    color: #000; /* Titres en noir */
+.edit-h2 {
+    color: #000;
     padding-left: 10px;
 }
 
@@ -43,8 +43,8 @@ option {
 
 .button-edit {
     padding: 10px 20px;
-    background-color: #000; /* Fond noir pour les boutons */
-    color: #fff; /* Texte blanc pour les boutons */
+    background-color: #000;
+    color: #fff;
     border: 1px solid #000;
     cursor: pointer;
     margin-top: 10px;
@@ -52,7 +52,24 @@ option {
 }
 
 .button-edit:hover {
-    background-color: #fff; /* Changement de couleur au survol */
+    background-color: #fff;
     color: #000;
     border: 1px solid #000;
+}
+
+.button-delete {
+    padding: 10px 20px;
+    margin-left: 30px;
+    background-color: #fff; 
+    color: red;
+    border: 1px solid red;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.button-delete:hover {
+    background-color: red;
+    color: #fff;
+    border: 1px solid red;
 }

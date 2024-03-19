@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function Register() {
     const navigate = useNavigate();
@@ -39,15 +39,66 @@ export default function Register() {
         setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
     }
 
+    // function handleSignUp(e) {
+    //     e.preventDefault();
+    //     setError("");
+
+    //     createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
+    //         .then(async (userCredential) => {
+    //             const uid = userCredential.user.uid;
+    //             const apiUrl = `https://swp-timeshare-back.vercel.app/api/customer?id=${uid}`;
+
+    //             fetch(apiUrl, { method: 'POST' })
+    //                 .then(data => {
+    //                     console.log('Success:', data);
+    //                 })
+    //                 .catch((error) => {
+    //                     console.error('Error:', error);
+    //                     setError("Failed to register the user in the database.");
+    //                 });
+
+    //             // Check against the whitelist in Firestore
+    //             const docRef = doc(db, "adminWhitelist", userCredentials.email);
+    //             const docSnap = await getDoc(docRef);
+    //             if (docSnap.exists()) {
+    //                 navigate("/admin");
+    //             } else {
+    //                 navigate("/");
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             // Handle errors from Firebase Authentication
+    //             setError(error.message);
+    //         });
+
+    // }
+
     function handleSignUp(e) {
         e.preventDefault();
         setError("");
-
+    
         createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
             .then(async (userCredential) => {
                 const uid = userCredential.user.uid;
+                const defaultUserData = {
+                    "Name": "Name",
+                    "Last name": "Last name",
+                    "Date of birth": "01/01/2024",
+                    "Gender": "F",
+                    "Email": userCredentials.email,
+                    "Phone number": "1234567890"
+                };
+    
+                try {
+                    await setDoc(doc(db, "users", uid), defaultUserData);
+                } catch (error) {
+                    console.error('Error adding document: ', error);
+                    setError("Failed to register the user in the database.");
+                    return;
+                }
+    
                 const apiUrl = `https://swp-timeshare-back.vercel.app/api/customer?id=${uid}`;
-
+    
                 fetch(apiUrl, { method: 'POST' })
                     .then(data => {
                         console.log('Success:', data);
@@ -56,7 +107,7 @@ export default function Register() {
                         console.error('Error:', error);
                         setError("Failed to register the user in the database.");
                     });
-
+    
                 // Check against the whitelist in Firestore
                 const docRef = doc(db, "adminWhitelist", userCredentials.email);
                 const docSnap = await getDoc(docRef);
@@ -70,7 +121,7 @@ export default function Register() {
                 // Handle errors from Firebase Authentication
                 setError(error.message);
             });
-
+    
     }
 
     console.log(auth);
