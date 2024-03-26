@@ -30,7 +30,7 @@ exports.GetAllProperties = async (req, res) => {
     console.log(req.query)
 
     let query = `SELECT p.timeshareId, p.name, p.address, p.price, p.img, rating
-                                        FROM (SELECT p.*, AVG(r.rating) AS rating
+                                        FROM (SELECT p.*, CAST(avg(r.rating) as DECIMAL(10,1)) AS rating
                             FROM Properties p LEFT JOIN Reviews r
                                 ON p.timeshareId = r.timeshareId
                         GROUP BY p.timeshareId) p LEFT JOIN Contracts c
