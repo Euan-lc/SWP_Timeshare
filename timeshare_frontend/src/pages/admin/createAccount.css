@@ -1,0 +1,18 @@
+.create-account-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 310px;
+    max-width: 300px;
+    margin: auto;
+  }
+  
+  .create-account-form input,
+  .create-account-form button {
+    margin: 5px 0;
+    padding: 10px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
