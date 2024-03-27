@@ -1,5 +1,5 @@
 import "./admin.css";
-import Sidebar from "../../components/sidebar/Sidebar";
+import Sidebar from "../../components/sidebarv2/Sidebar";
 
 export default function Admin() {
     return (

@@ -70,7 +70,6 @@ const EditProfile = () => {
                 const uid = user.uid;
                 const userDocRef = doc(db, 'users', uid);
                 await deleteDoc(userDocRef);
-
                 
                 await deleteUser(user);
                 console.log('User deleted successfully'); 
